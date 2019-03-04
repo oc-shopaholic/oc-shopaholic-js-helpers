@@ -1,0 +1,16 @@
+{
+  "name": "@lovata/shopaholic-search",
+  "version": "0.1.0",
+  "description": "",
+  "license": "GPL-3",
+  "keywords": [
+    "octobercms",
+    "shopaholic",
+    "search"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lovata/oc-shopaholic-js-helper.git"
+  },
+  "dependencies": {}
+}
