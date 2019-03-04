@@ -1,8 +1,9 @@
 {
   "name": "@lovata/shopaholic-search",
-  "version": "0.1.0",
-  "description": "",
-  "license": "GPL-3",
+  "author": "lovata",
+  "version": "1.0.0",
+  "description": "Package adds helper methods for integration with [Search for Shopaholic](https://octobercms.com/plugin/lovata-searchshopaholic) and [Shopaholic](https://octobercms.com/plugin/lovata-shopaholic) plugins.",
+  "license": "GPL-3.0-or-later",
   "keywords": [
     "octobercms",
     "shopaholic",
@@ -10,7 +11,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/lovata/oc-shopaholic-js-helper.git"
+    "url": "git+https://github.com/lovata/oc-shopaholic-js-helper.git"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "bugs": {
+    "url": "https://github.com/lovata/oc-shopaholic-js-helper/issues"
+  },
+  "homepage": "https://github.com/lovata/oc-shopaholic-js-helper/tree/master/packages/shopaholic-search#readme",
+  "main": "shopaholic-search.js"
 }

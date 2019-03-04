@@ -19,10 +19,10 @@ npm install @lovata/shopaholic-search
 
 Simple example:
 ```javascript
-import {ShopaholicSearch} from @lovata/shopaholic-search;
+import ShopaholicSearch from "@lovata/shopaholic-search";
 
 ShopaholicSearch.setAjaxRequestCallback(function(obRequestData) {
-  obRequestData.loading = '.pleloader';
+  obRequestData.loading = '.preloader';
   obRequestData.update = {'search/search-result': '.search-result-wrapper'};
   
   return obRequestData;
@@ -31,7 +31,7 @@ ShopaholicSearch.setAjaxRequestCallback(function(obRequestData) {
 
 Advanced example:
 ```javascript
-import {ShopaholicSearch} from @lovata/shopaholic-search;
+import ShopaholicSearch from "@lovata/shopaholic-search";
 
 ShopaholicSearch
   .setSearchInputSelector('search-input')
@@ -39,7 +39,7 @@ ShopaholicSearch
   .setSearchDelay(600)
   .setComponentMethod('CustomComponent::obAjaxSearch')
   .setAjaxRequestCallback(function(obRequestData) {
-      obRequestData.loading = '.pleloader';
+      obRequestData.loading = '.preloader';
       obRequestData.update = {'search/search-result': '.search-result-wrapper'};
       
       return obRequestData;
@@ -60,10 +60,10 @@ You can set callback function. This callback function will be called before send
 You can change request object inside callback function. For example: add called partial and selector, add preloader class, etc.
 
 ```javascript
-import {ShopaholicSearch} from @lovata/shopaholic-search;
+import ShopaholicSearch from "@lovata/shopaholic-search";
 
 ShopaholicSearch.setAjaxRequestCallback(function(obRequestData) {
-  obRequestData.loading = '.pleloader';
+  obRequestData.loading = '.preloader';
   obRequestData.update = {'search/search-result': '.search-result-wrapper'};
   
   return obRequestData;
@@ -76,7 +76,7 @@ You can to redeclare default selector of search input.
 Default value is "._shopaholic-search-input".
 
 ```javascript
-import {ShopaholicSearch} from @lovata/shopaholic-search;
+import ShopaholicSearch from "@lovata/shopaholic-search";
 
 ShopaholicSearch.setSearchInputSelector('.search-input').init();
 ```
@@ -88,7 +88,7 @@ Default value is 3 symbols.
 Ajax request will be sent only when user enters the number of characters greater than or equal to specified value.
 
 ```javascript
-import {ShopaholicSearch} from @lovata/shopaholic-search;
+import ShopaholicSearch from "@lovata/shopaholic-search";
 
 ShopaholicSearch.setSearchLimit(5).init();
 ```
@@ -100,7 +100,7 @@ Default value is 400 ms.
 Ajax request will be sent only when user does not press keys during the delay time.
 
 ```javascript
-import {ShopaholicSearch} from @lovata/shopaholic-search;
+import ShopaholicSearch from "@lovata/shopaholic-search";
 
 ShopaholicSearch.setSearchDelay(600).init();
 ```
@@ -111,7 +111,7 @@ You can to redeclare default ajax component method.
 Default value is "ProductList::onAjaxRequest"
 
 ```javascript
-import {ShopaholicSearch} from @lovata/shopaholic-search;
+import ShopaholicSearch from "@lovata/shopaholic-search";
 
 ShopaholicSearch.setComponentMethod('CustomComponent::obAjaxSearch').init();
 ```
