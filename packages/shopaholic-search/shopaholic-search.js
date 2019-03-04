@@ -85,6 +85,18 @@ export default new class ShopaholicSearch {
   }
 
   /**
+   * Redeclare default selector of search input
+   *
+   * @param {string} sSearchInput
+   * @returns {ShopaholicSearch}
+   */
+  setSearchInputSelector(sSearchInput) {
+    this.sSearchInput = sSearchInput;
+
+    return this;
+  }
+
+  /**
    * Redeclare default search limit value
    * Default value is 3 symbols
    * Ajax request will be sent only when user enters the number of characters greater than or equal to specified value.
@@ -108,22 +120,10 @@ export default new class ShopaholicSearch {
    * @param {int} iSearchDelay
    * @returns {ShopaholicSearch}
    */
-  setSerachDelay(iSearchDelay) {
+  setSearchDelay(iSearchDelay) {
     if (iSearchDelay > 0) {
       this.iSearchDelay = iSearchDelay;
     }
-
-    return this;
-  }
-
-  /**
-   * Redeclare default selector of search input
-   *
-   * @param {string} sSearchInput
-   * @returns {ShopaholicSearch}
-   */
-  setSerachInputSelector(sSearchInput) {
-    this.sSearchInput = sSearchInput;
 
     return this;
   }
