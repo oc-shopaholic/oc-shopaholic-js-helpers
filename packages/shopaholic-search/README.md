@@ -1,4 +1,4 @@
-# Shopaholic search package
+# Search for [Shopaholic](https://octobercms.com/plugin/lovata-shopaholic) package
 
 Package adds helper methods for integration with [Search for Shopaholic](https://octobercms.com/plugin/lovata-searchshopaholic)
 and [Shopaholic](https://octobercms.com/plugin/lovata-shopaholic) plugins.
