@@ -1,9 +1,10 @@
 /**
  * @author  Andrey Kharanenka, a.khoronenko@lovata.com, LOVATA Group
  */
-export default new class ShopaholicClearWishList {
+export default class ShopaholicClearWishList {
   constructor() {
-    this.sButtonSelector = '._shopaholic-remove-wish-list-button';
+    this.sDefaultButtonClass = '_shopaholic-remove-wish-list-button';
+    this.sButtonSelector = `.${this.sDefaultButtonClass}`;
 
     this.sComponentMethod = 'ProductList::onClearWishList';
     this.obAjaxRequestCallback = null;
@@ -14,7 +15,7 @@ export default new class ShopaholicClearWishList {
    */
   init() {
     $(document).on('click', this.sButtonSelector, (obEvent) => {
-      let obButton = $(obEvent.currentTarget);
+      const obButton = $(obEvent.currentTarget);
 
       this.clear(obButton);
     });

@@ -1,10 +1,13 @@
 /**
  * @author  Andrey Kharanenka, a.khoronenko@lovata.com, LOVATA Group
  */
-export default new class ShopaholicAddWishList {
+export default class ShopaholicAddWishList {
   constructor() {
-    this.sButtonSelector = '._shopaholic-add-wish-list-button';
-    this.sWrapperSelector = '._shopaholic-product-wrapper';
+    this.sDefaultButtonClass = '_shopaholic-add-wish-list-button';
+    this.sButtonSelector = `.${this.sDefaultButtonClass}`;
+
+    this.sDefaultWrapperClass = '_shopaholic-product-wrapper';
+    this.sWrapperSelector = `.${this.sDefaultWrapperClass}`;
     this.sAttributeName = 'data-product-id';
 
     this.sComponentMethod = 'ProductList::onAddToWishList';
@@ -16,9 +19,8 @@ export default new class ShopaholicAddWishList {
    */
   init() {
     $(document).on('click', this.sButtonSelector, (obEvent) => {
-      let obButton = $(obEvent.currentTarget),
-        obProduct = obButton.parents(this.sWrapperSelector),
-        iProductID = obProduct.attr(this.sAttributeName);
+      const obButton = $(obEvent.currentTarget),
+        iProductID = this.getProductID(obButton);
 
       this.add(iProductID, obButton);
     });
@@ -39,6 +41,18 @@ export default new class ShopaholicAddWishList {
     }
 
     $.request(this.sComponentMethod, obRequestData);
+  }
+
+  /**
+   * Get product ID from attribute
+   * @param obButton
+   * @returns {int}
+   */
+  getProductID(obButton) {
+    const obProduct = obButton.parents(this.sWrapperSelector),
+      iProductID = obProduct.attr(this.sAttributeName);
+
+    return iProductID;
   }
 
   /**

@@ -1,9 +1,10 @@
 /**
  * @author  Andrey Kharanenka, a.khoronenko@lovata.com, LOVATA Group
  */
-export default new class ShopaholicSearch {
+export default class ShopaholicSearch {
   constructor() {
-    this.sSearchInput = '._shopaholic-search-input';
+    this.sDefaultSearchInputClass = '_shopaholic-search-input';
+    this.sSearchInput = `.${this.sDefaultSearchInputClass}`;
 
     this.sComponentMethod = 'ProductList::onAjaxRequest';
     this.obAjaxRequestCallback = null;

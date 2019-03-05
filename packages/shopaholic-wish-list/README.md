@@ -28,27 +28,29 @@ Simple example:
 ```javascript
 import ShopaholicAddWishList from "@lovata/shopaholic-wish-list/shopaholic-add-wish-list";
 
-ShopaholicAddWishList.init();
+const obHelper = new ShopaholicAddWishList();
+obHelper.init();
 ````
 
 Advanced example:
 ```javascript
 import ShopaholicAddWishList from "@lovata/shopaholic-wish-list/shopaholic-add-wish-list";
 
-ShopaholicAddWishList
-.setButtonSelector('.add-wish-list-button')
-.setWrapperSelector('.product-wrapper')
-.setAttributeName('data-id')
-.setAjaxRequestCallback((obRequestData, obButton) => {
-  obRequestData.loading = '.preloader';
-  obRequestData.update = {'wish-list/wish-list-info': '.wish-list-info-wrapper'};
-  obRequestData.complete = () => {
-    obButton.hide();
-  };
+const obHelper = new ShopaholicAddWishList();
+obHelper
+  .setButtonSelector('.add-wish-list-button')
+  .setWrapperSelector('.product-wrapper')
+  .setAttributeName('data-id')
+  .setAjaxRequestCallback((obRequestData, obButton) => {
+    obRequestData.loading = '.preloader';
+    obRequestData.update = {'wish-list/wish-list-info': '.wish-list-info-wrapper'};
+    obRequestData.complete = () => {
+      obButton.hide();
+    };
     
-  return obRequestData;
-})
-.init();
+    return obRequestData;
+  })
+  .init();
 ```
 
 ### Methods
@@ -66,7 +68,8 @@ You can change request object inside callback function. For example: add called 
 ```javascript
 import ShopaholicAddWishList from "@lovata/shopaholic-wish-list/shopaholic-add-wish-list";
 
-ShopaholicAddWishList.setAjaxRequestCallback((obRequestData, obButton) => {
+const obHelper = new ShopaholicAddWishList();
+obHelper.setAjaxRequestCallback((obRequestData, obButton) => {
   obRequestData.loading = '.preloader';
   obRequestData.update = {'wish-list/wish-list-info': '.wish-list-info-wrapper'}; 
   obRequestData.complete = () => {
@@ -85,7 +88,8 @@ Default value is **"._shopaholic-add-wish-list-button"**.
 ```javascript
 import ShopaholicAddWishList from "@lovata/shopaholic-wish-list/shopaholic-add-wish-list";
 
-ShopaholicAddWishList.setButtonSelector('.add-wish-list-button').init();
+const obHelper = new ShopaholicAddWishList();
+obHelper.setButtonSelector('.add-wish-list-button').init();
 ```
 
 #### setWrapperSelector()
@@ -96,7 +100,8 @@ Default value is **"._shopaholic-product-wrapper"**.
 ```javascript
 import ShopaholicAddWishList from "@lovata/shopaholic-wish-list/shopaholic-add-wish-list";
 
-ShopaholicAddWishList.setWrapperSelector('.product-wrapper').init();
+const obHelper = new ShopaholicAddWishList();
+obHelper.setWrapperSelector('.product-wrapper').init();
 ```
 
 #### setAttributeName()
@@ -107,7 +112,8 @@ Default value is **"data-product-id"**.
 ```javascript
 import ShopaholicAddWishList from "@lovata/shopaholic-wish-list/shopaholic-add-wish-list";
 
-ShopaholicAddWishList.setAttributeName('.data-id').init();
+const obHelper = new ShopaholicAddWishList();
+obHelper.setAttributeName('.data-id').init();
 ```
 
 #### setComponentMethod()
@@ -118,7 +124,8 @@ Default value is **"ProductList::onAddToWishList"**.
 ```javascript
 import ShopaholicAddWishList from "@lovata/shopaholic-wish-list/shopaholic-add-wish-list";
 
-ShopaholicAddWishList.setAttributeName('ProductPage::onAddToWishList').init();
+const obHelper = new ShopaholicAddWishList();
+obHelper.setAttributeName('ProductPage::onAddToWishList').init();
 ```
 
 ## **shopaholic-remove-wish-list**
@@ -138,27 +145,29 @@ Simple example:
 ```javascript
 import ShopaholicRemoveWishList from "@lovata/shopaholic-wish-list/shopaholic-remove-wish-list";
 
-ShopaholicRemoveWishList.init();
+const obHelper = new ShopaholicRemoveWishList();
+obHelper.init();
 ````
 
 Advanced example:
 ```javascript
 import ShopaholicRemoveWishList from "@lovata/shopaholic-wish-list/shopaholic-remove-wish-list";
 
-ShopaholicRemoveWishList
-.setButtonSelector('.remove-wish-list-button')
-.setWrapperSelector('.product-wrapper')
-.setAttributeName('data-id')
-.setAjaxRequestCallback((obRequestData, obButton) => {
-  obRequestData.loading = '.preloader';
-  obRequestData.update = {'wish-list/wish-list-info': '.wish-list-info-wrapper'};
-  obRequestData.complete = () => {
-    obButton.hide();
-  };
-    
-  return obRequestData;
-})
-.init();
+const obHelper = new ShopaholicRemoveWishList();
+obHelper
+  .setButtonSelector('.remove-wish-list-button')
+  .setWrapperSelector('.product-wrapper')
+  .setAttributeName('data-id')
+  .setAjaxRequestCallback((obRequestData, obButton) => {
+    obRequestData.loading = '.preloader';
+    obRequestData.update = {'wish-list/wish-list-info': '.wish-list-info-wrapper'};
+    obRequestData.complete = () => {
+      obButton.hide();
+    };
+
+    return obRequestData;
+  })
+  .init();
 ```
 
 ### Methods
@@ -176,7 +185,8 @@ You can change request object inside callback function. For example: add called 
 ```javascript
 import ShopaholicRemoveWishList from "@lovata/shopaholic-wish-list/shopaholic-remove-wish-list";
 
-ShopaholicRemoveWishList.setAjaxRequestCallback((obRequestData, obButton) => {
+const obHelper = new ShopaholicRemoveWishList();
+obHelper.setAjaxRequestCallback((obRequestData, obButton) => {
   obRequestData.loading = '.preloader';
   obRequestData.update = {'wish-list/wish-list-info': '.wish-list-info-wrapper'};
   obRequestData.complete = () => {
@@ -195,7 +205,8 @@ Default value is **"._shopaholic-remove-wish-list-button"**.
 ```javascript
 import ShopaholicRemoveWishList from "@lovata/shopaholic-wish-list/shopaholic-remove-wish-list";
 
-ShopaholicRemoveWishList.setButtonSelector('.remove-wish-list-button').init();
+const obHelper = new ShopaholicRemoveWishList();
+obHelper.setButtonSelector('.remove-wish-list-button').init();
 ```
 
 #### setWrapperSelector()
@@ -206,7 +217,8 @@ Default value is **"._shopaholic-product-wrapper"**.
 ```javascript
 import ShopaholicRemoveWishList from "@lovata/shopaholic-wish-list/shopaholic-remove-wish-list";
 
-ShopaholicRemoveWishList.setWrapperSelector('.product-wrapper').init();
+const obHelper = new ShopaholicRemoveWishList();
+obHelper.setWrapperSelector('.product-wrapper').init();
 ```
 
 #### setAttributeName()
@@ -217,7 +229,8 @@ Default value is **"data-product-id"**.
 ```javascript
 import ShopaholicRemoveWishList from "@lovata/shopaholic-wish-list/shopaholic-remove-wish-list";
 
-ShopaholicRemoveWishList.setAttributeName('.data-id').init();
+const obHelper = new ShopaholicRemoveWishList();
+obHelper.setAttributeName('.data-id').init();
 ```
 
 #### setComponentMethod()
@@ -228,7 +241,8 @@ Default value is **"ProductList::onRemoveFromWishList"**.
 ```javascript
 import ShopaholicRemoveWishList from "@lovata/shopaholic-wish-list/shopaholic-remove-wish-list";
 
-ShopaholicRemoveWishList.setAttributeName('ProductPage::onRemoveFromWishList').init();
+const obHelper = new ShopaholicRemoveWishList();
+obHelper.setAttributeName('ProductPage::onRemoveFromWishList').init();
 ```
 
 ## **shopaholic-clear-wish-list**
@@ -245,25 +259,27 @@ Simple example:
 ```javascript
 import ShopaholicClearWishList from "@lovata/shopaholic-wish-list/shopaholic-clear-wish-list";
 
-ShopaholicClearWishList.init();
+const obHelper = new ShopaholicClearWishList();
+obHelper.init();
 ````
 
 Advanced example:
 ```javascript
 import ShopaholicClearWishList from "@lovata/shopaholic-wish-list/shopaholic-clear-wish-list";
 
-ShopaholicClearWishList
-.setButtonSelector('.clear-wish-list-button')
-.setAjaxRequestCallback((obRequestData, obButton) => {
-  obRequestData.loading = '.preloader';
-  obRequestData.update = {'wish-list/wish-list-info': '.wish-list-info-wrapper'};
-  obRequestData.complete = () => {
-    obButton.hide();
-  };
+const obHelper = new ShopaholicClearWishList();
+obHelper
+  .setButtonSelector('.clear-wish-list-button')
+  .setAjaxRequestCallback((obRequestData, obButton) => {
+    obRequestData.loading = '.preloader';
+    obRequestData.update = {'wish-list/wish-list-info': '.wish-list-info-wrapper'};
+    obRequestData.complete = () => {
+      obButton.hide();
+    };
     
-  return obRequestData;
-})
-.init();
+    return obRequestData;
+  })
+  .init();
 ```
 
 ### Methods
@@ -281,7 +297,8 @@ You can change request object inside callback function. For example: add called 
 ```javascript
 import ShopaholicClearWishList from "@lovata/shopaholic-wish-list/shopaholic-clear-wish-list";
 
-ShopaholicClearWishList.setAjaxRequestCallback((obRequestData, obButton) => {
+const obHelper = new ShopaholicClearWishList();
+obHelper.setAjaxRequestCallback((obRequestData, obButton) => {
   obRequestData.loading = '.preloader';
   obRequestData.update = {'wish-list/wish-list-info': '.wish-list-info-wrapper'};
   obRequestData.complete = () => {
@@ -300,7 +317,8 @@ Default value is **"._shopaholic-clear-wish-list-button"**.
 ```javascript
 import ShopaholicClearWishList from "@lovata/shopaholic-wish-list/shopaholic-clear-wish-list";
 
-ShopaholicClearWishList.setButtonSelector('.clear-wish-list-button').init();
+const obHelper = new ShopaholicClearWishList();
+obHelper.setButtonSelector('.clear-wish-list-button').init();
 ```
 
 #### setComponentMethod()
@@ -311,7 +329,8 @@ Default value is **"ProductList::onClearWishList"**.
 ```javascript
 import ShopaholicClearWishList from "@lovata/shopaholic-wish-list/shopaholic-clear-wish-list";
 
-ShopaholicClearWishList.setAttributeName('ProductPage::onClearWishList').init();
+const obHelper = new ShopaholicClearWishList();
+obHelper.setAttributeName('ProductPage::onClearWishList').init();
 ```
 
 ## License

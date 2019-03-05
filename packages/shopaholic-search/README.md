@@ -21,7 +21,8 @@ Simple example:
 ```javascript
 import ShopaholicSearch from "@lovata/shopaholic-search";
 
-ShopaholicSearch.setAjaxRequestCallback(function(obRequestData) {
+const obHelper = new ShopaholicSearch();
+obHelper.setAjaxRequestCallback(function(obRequestData) {
   obRequestData.loading = '.preloader';
   obRequestData.update = {'search/search-result': '.search-result-wrapper'};
   
@@ -33,17 +34,18 @@ Advanced example:
 ```javascript
 import ShopaholicSearch from "@lovata/shopaholic-search";
 
-ShopaholicSearch
+const obHelper = new ShopaholicSearch();
+obHelper
   .setSearchInputSelector('search-input')
   .setSearchLimit(5)
   .setSearchDelay(600)
   .setComponentMethod('CustomComponent::obAjaxSearch')
   .setAjaxRequestCallback(function(obRequestData) {
-      obRequestData.loading = '.preloader';
-      obRequestData.update = {'search/search-result': '.search-result-wrapper'};
-      
-      return obRequestData;
-}).init();
+    obRequestData.loading = '.preloader';
+    obRequestData.update = {'search/search-result': '.search-result-wrapper'};
+
+    return obRequestData;
+  }).init();
 ```
 
 
@@ -62,7 +64,8 @@ You can change request object inside callback function. For example: add called 
 ```javascript
 import ShopaholicSearch from "@lovata/shopaholic-search";
 
-ShopaholicSearch.setAjaxRequestCallback(function(obRequestData) {
+const obHelper = new ShopaholicSearch();
+obHelper.setAjaxRequestCallback(function(obRequestData) {
   obRequestData.loading = '.preloader';
   obRequestData.update = {'search/search-result': '.search-result-wrapper'};
   
@@ -78,7 +81,8 @@ Default value is "._shopaholic-search-input".
 ```javascript
 import ShopaholicSearch from "@lovata/shopaholic-search";
 
-ShopaholicSearch.setSearchInputSelector('.search-input').init();
+const obHelper = new ShopaholicSearch();
+obHelper.setSearchInputSelector('.search-input').init();
 ```
 
 ### setSearchLimit()
@@ -90,7 +94,8 @@ Ajax request will be sent only when user enters the number of characters greater
 ```javascript
 import ShopaholicSearch from "@lovata/shopaholic-search";
 
-ShopaholicSearch.setSearchLimit(5).init();
+const obHelper = new ShopaholicSearch();
+obHelper.setSearchLimit(5).init();
 ```
 
 ### setSearchDelay
@@ -102,7 +107,8 @@ Ajax request will be sent only when user does not press keys during the delay ti
 ```javascript
 import ShopaholicSearch from "@lovata/shopaholic-search";
 
-ShopaholicSearch.setSearchDelay(600).init();
+const obHelper = new ShopaholicSearch();
+obHelper.setSearchDelay(600).init();
 ```
  
 ### setComponentMethod()
@@ -113,7 +119,8 @@ Default value is "ProductList::onAjaxRequest"
 ```javascript
 import ShopaholicSearch from "@lovata/shopaholic-search";
 
-ShopaholicSearch.setComponentMethod('CustomComponent::obAjaxSearch').init();
+const obHelper = new ShopaholicSearch();
+obHelper.setComponentMethod('CustomComponent::obAjaxSearch').init();
 ```
 
 ## License
