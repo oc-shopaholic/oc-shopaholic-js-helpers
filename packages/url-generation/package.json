@@ -1,0 +1,21 @@
+{
+  "name": "@lovata/url-generation",
+  "author": "lovata",
+  "version": "0.2.0",
+  "description": "Package adds helper methods for URL generation",
+  "license": "GPL-3.0-or-later",
+  "keywords": [
+    "octobercms",
+    "url"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lovata/oc-shopaholic-js-helper.git"
+  },
+  "dependencies": {},
+  "bugs": {
+    "url": "https://github.com/lovata/oc-shopaholic-js-helper/issues"
+  },
+  "homepage": "https://github.com/lovata/oc-shopaholic-js-helper/tree/master/packages/url-generation#readme",
+  "main": "url-generation.js"
+}
