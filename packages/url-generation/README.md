@@ -54,6 +54,20 @@ UrlGeneration.update();
 //URL http:://site.com?page=1&sorting=popularity|desc
 ```
 
+### clear()
+
+Clear search string.
+For example:
+```javascript
+import UrlGeneration from "@lovata/url-generation";
+
+//URL http:://site.com?page=1&sorting=popularity|desc&brand=apple|samsung
+UrlGeneration.init();
+UrlGeneration.clear();
+
+//URL http:://site.com
+```
+
 ## License
 
 © 2019, [LOVATA Group, LLC](https://github.com/lovata) under [GNU GPL v3](https://opensource.org/licenses/GPL-3.0).

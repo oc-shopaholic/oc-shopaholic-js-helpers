@@ -1,7 +1,7 @@
 {
   "name": "@lovata/url-generation",
   "author": "lovata",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Package adds helper methods for URL generation",
   "license": "GPL-3.0-or-later",
   "keywords": [

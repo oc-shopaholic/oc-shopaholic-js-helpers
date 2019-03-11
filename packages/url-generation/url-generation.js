@@ -27,10 +27,20 @@ export default new class UrlGeneration {
     });
   }
 
+  clear() {
+    this.obParamList = {};
+
+    history.pushState(null, null, `${this.sBaseURL}`);
+  }
+
   update() {
     this.generateSearchString();
 
-    history.pushState(null, null, `${this.sBaseURL}?${this.sSearchString}`);
+    if (Object.keys(this.obParamList).length > 0) {
+      history.pushState(null, null, `${this.sBaseURL}?${this.sSearchString}`);
+    } else {
+      history.pushState(null, null, `${this.sBaseURL}`);
+    }
   }
 
   generateSearchString() {
