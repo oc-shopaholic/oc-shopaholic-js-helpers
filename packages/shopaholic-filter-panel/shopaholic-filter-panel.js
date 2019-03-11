@@ -23,6 +23,7 @@ export default class ShopaholicFilterPanel {
    */
   init() {
     $(document).on(this.sEventType, this.sWrapperSelector, () => {
+      UrlGeneration.init();
       this.prepareRequestData();
 
       UrlGeneration.remove('page');

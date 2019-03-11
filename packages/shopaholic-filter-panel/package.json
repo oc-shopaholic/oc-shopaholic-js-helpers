@@ -1,7 +1,7 @@
 {
   "name": "@lovata/shopaholic-filter-panel",
   "author": "lovata",
-  "version": "0.2.1",
+  "version": "0.4.0",
   "description": "Package adds helper methods for integration with [Filter for Shopaholic](https://octobercms.com/plugin/lovata-filtershopaholic) and [Shopaholic](https://octobercms.com/plugin/lovata-shopaholic) plugins.",
   "license": "GPL-3.0-or-later",
   "keywords": [
@@ -14,7 +14,7 @@
     "url": "https://github.com/lovata/oc-shopaholic-js-helper.git"
   },
   "dependencies": {
-    "@lovata/url-generation": "^0.2.0"
+    "@lovata/url-generation": "^0.4.0"
   },
   "bugs": {
     "url": "https://github.com/lovata/oc-shopaholic-js-helper/issues"

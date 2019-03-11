@@ -24,6 +24,7 @@ export default class ShopaholicSorting {
       const obSelect = $(obEvent.currentTarget),
         sSorting = obSelect.val();
 
+      UrlGeneration.init();
       UrlGeneration.set(this.sFiledName, [sSorting]);
       UrlGeneration.update();
       if (!this.obProductListHelper) {

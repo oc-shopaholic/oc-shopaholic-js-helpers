@@ -28,6 +28,7 @@ export default class ShopaholicPagination {
       const obButton = $(obEvent.currentTarget),
         iPage = obButton.attr(this.sAttributeName);
 
+      UrlGeneration.init();
       if (iPage == 1) {
         UrlGeneration.remove(this.sFiledName);
       } else {

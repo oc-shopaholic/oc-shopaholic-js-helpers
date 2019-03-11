@@ -24,6 +24,7 @@ export default class ShopaholicFilterPrice {
    */
   init() {
     $(document).on(this.sEventType, this.sInputSelector, () => {
+      UrlGeneration.init();
       this.prepareRequestData();
 
       UrlGeneration.remove('page');
