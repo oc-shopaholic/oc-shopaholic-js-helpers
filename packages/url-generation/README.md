@@ -11,6 +11,7 @@ npm install @lovata/url-generation
 ```javascript
 import UrlGeneration from "@lovata/url-generation";
 
+UrlGeneration.init();
 UrlGeneration.remove('page');
 UrlGeneration.set('sorting', 'popularity|desc');
 
@@ -27,6 +28,7 @@ For example:
 import UrlGeneration from "@lovata/url-generation";
 
 //URL http:://site.com?page=1
+UrlGeneration.init();
 UrlGeneration.set('sorting', 'popularity|desc');
 UrlGeneration.update();
 
@@ -45,6 +47,7 @@ For example:
 import UrlGeneration from "@lovata/url-generation";
 
 //URL http:://site.com?page=1&sorting=popularity|desc&brand=apple|samsung
+UrlGeneration.init();
 UrlGeneration.set('brand');
 UrlGeneration.update();
 

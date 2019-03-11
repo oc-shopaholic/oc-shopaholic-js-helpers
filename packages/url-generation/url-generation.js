@@ -4,9 +4,12 @@
 export default new class UrlGeneration {
   constructor() {
     this.sBaseURL = `${location.origin}${location.pathname}`;
+    this.init();
+  }
+
+  init() {
     this.sSearchString = window.location.search.substring(1);
     this.obParamList = {};
-
     let arPartList = this.sSearchString.split('&');
     arPartList.forEach((sParam) => {
       let iPosition = sParam.indexOf("=");
@@ -26,6 +29,7 @@ export default new class UrlGeneration {
 
   update() {
     this.generateSearchString();
+
     history.pushState(null, null, `${this.sBaseURL}?${this.sSearchString}`);
   }
 
