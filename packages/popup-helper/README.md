@@ -6,14 +6,25 @@
 npm install @lovata/popup-helper
 ```
 
-## Basic usage
+## Initialization
 
 ```javascript
-import PopupHelper from "@lovata/popup-helper";
+import PopupHelper from '@lovata/popup-helper';
 
 ```
 
+```css
+
+@import '@lovata/popup-helper/css/popup-helper';
+
+```
+
+**This css allows for work with only 2 viewport types: mobile (less then 769px) and desktop. If you want change it so you should use ```changeNoScrollSelector()``` method**
+
 ## Methods
+
+### changeNoScrollSelector()
+`Change class for scroll disabling`
 
 ### saveScrollPosition()
 `Return scroll position`

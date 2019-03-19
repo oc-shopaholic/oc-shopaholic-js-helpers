@@ -15,6 +15,18 @@ export default new class popupHelper {
     this.pageOffset = '';
   }
 
+
+  /**
+   * 
+   * 
+   * @param {string} cssClass
+   * @description Set custom css class for 'body';
+   */
+
+  changeNoScrollSelector(cssClass) {
+    this.noScrollSelector = cssClass;
+  }
+
    /**
    * Return scroll position
    */
