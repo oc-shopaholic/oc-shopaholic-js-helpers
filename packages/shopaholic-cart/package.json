@@ -1,0 +1,23 @@
+{
+  "name": "@lovata/shopaholic-cart",
+  "author": "lovata",
+  "version": "0.1.0",
+  "description": "Package adds helper methods for integration with [Orders for Shopaholic](https://octobercms.com/plugin/lovata-ordersshopaholic) and [Shopaholic](https://octobercms.com/plugin/lovata-shopaholic) plugins.",
+  "license": "GPL-3.0-or-later",
+  "keywords": [
+    "octobercms",
+    "shopaholic",
+    "cart",
+    "checkout",
+    "order"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lovata/oc-shopaholic-js-helper.git"
+  },
+  "dependencies": {},
+  "bugs": {
+    "url": "https://github.com/lovata/oc-shopaholic-js-helper/issues"
+  },
+  "homepage": "https://github.com/lovata/oc-shopaholic-js-helper/tree/master/packages/shopaholic-cart#readme"
+}
