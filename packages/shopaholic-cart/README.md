@@ -1,8 +1,9 @@
-# Cart for  [Shopaholic](https://octobercms.com/plugin/lovata-shopaholic) package
+# Cart for [Shopaholic](https://octobercms.com/plugin/lovata-shopaholic) package
 
-Package adds helper methods for integration with [Orders for Shopaholic](https://octobercms.com/plugin/lovata-ordersshopaholic) and [Shopaholic](https://octobercms.com/plugin/lovata-shopaholic) plugins.
+Package adds helper methods for integration with [Orders for Shopaholic](https://octobercms.com/plugin/lovata-ordersshopaholic)
+and [Shopaholic](https://octobercms.com/plugin/lovata-shopaholic) plugins.
 
-Package will allow you to quickly add "Add to cart", "Remove from cart", "Change quantity of product in cart,'Update cart price'" methods in your project.
+Package will allow you to quickly add cart, checkout page in your project.
 
 ## installation
 

@@ -1,13 +1,15 @@
 {
   "name": "@lovata/shopaholic-cart",
   "author": "lovata",
-  "version": "0.3.0",
-  "description": "Package adds helper methods for work with cart",
+  "version": "0.1.0",
+  "description": "Package adds helper methods for integration with [Orders for Shopaholic](https://octobercms.com/plugin/lovata-ordersshopaholic) and [Shopaholic](https://octobercms.com/plugin/lovata-shopaholic) plugins.",
   "license": "GPL-3.0-or-later",
   "keywords": [
     "octobercms",
+    "shopaholic",
     "cart",
-    "shopaholic"
+    "checkout",
+    "order"
   ],
   "repository": {
     "type": "git",
