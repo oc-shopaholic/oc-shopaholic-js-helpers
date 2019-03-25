@@ -17,18 +17,18 @@ Class will allow you to quickly add "Add to cart", "Remove from cart"  button in
 
 ### Basic usage
 
-You should use this css class for correct package work
+You should use this css class for correct package work or change it after class initialization
 
-| Selector | Type |Description |
-| --- | --- | --- |
-| `_shopaholic-add-to-cart` | CSS class |Class for buy button |
-| `_shopaholic-product-wrapper` | CSS class | Product card wrapper |
-| `_shopaholic-quantity-input` | CSS class |Input with product quantity. Default quantity = 1 |
-| `_shopaholic-cart-total-price` | CSS class | Wrapper for partial with total price |
-| `offer_id` | Input name | `Input` name using as ID for search `offer id` |
+| Selector | Type |Key |Description |
+| --- | --- | --- | --- |
+| `_shopaholic-add-to-cart` | CSS class | sButtonClass |Class for buy button |
+| `_shopaholic-product-wrapper` | CSS class |sWrapperClass| Product card wrapper |
+| `_shopaholic-quantity-input` | CSS class |sQuantityInputClass|Input with product quantity. Default quantity = 1 |
+| `_shopaholic-cart-total-price` | CSS class |sTotalPriceWrapperClass| Wrapper for partial with total price |
+| `offer_id` | Input name |sOfferIdAttr| `Input` name using as ID for search `offer id` |
 
 Also you should set correct path to total price partial or use default: 
-`product/cart/cart-mini/cart-mini-price/cart-mini-price`
+`product/cart/cart-mini/cart-mini-price/cart-mini-price`. For rewrite you can use `.sDefaultTotalPricePartial` key
 
 ## Add to cart from page
 
@@ -43,7 +43,6 @@ Also you should set correct path to total price partial or use default:
 </section>
 ```
 
-Example:
 ```javascript
 import ShopaholicCartManipulation from "@lovata/shopaholic-cart/shopaholic-cart-manipulation";
 
@@ -54,7 +53,7 @@ CartManipulation.init();
 ### Methods
 
 ## init()
-Init click handlers
+Init click handler
 
 ## add(iOfferID, quantity, button, forceAdd)
 Add product to cart
@@ -64,7 +63,7 @@ Add product to cart
 | iOfferID | <code>int</code> | Offer ID |
 | quantity | <code>int</code> | Product quantity |
 | button | <code>node</code> | Add to cart button |
-| forceAdd | <code>boolean</code> | Sets enforced method `this.sAddComponentMethod` |
+| forceAdd | <code>boolean</code> | Sets the forced method `this.sAddComponentMethod` |
 
 ##remove(removeBtnNode)
 
@@ -111,17 +110,17 @@ Helper class will allow you to methods for work with response object and update 
 
 ### Basic usage
 
-You should use this css class for correct package work
+You should use this css class for correct package work or change it after class initialization
 
-| Selector | Type |Description |
-| --- | --- | --- |
-| `_shopaholic-cart-button-wrapper` | CSS class | Class of button for open mini-cart |
-|`_shopaholic-current-price`| CSS class | Class of node with current offer price |
-|`_shopaholic-old-price`| CSS class | Class of node with old offer price |
-| `data-shopaholic-position-id` | Data attribute | Contain position id |
+| Selector | Type |Key |Description |
+| --- | --- | --- | --- |
+| `_shopaholic-cart-button-wrapper` | CSS class |sCartMiniWrapperClass| Class of button for open mini-cart |
+|`_shopaholic-current-price`| CSS class |sPositionCurrentPriceClass| Class of node with current offer price |
+|`_shopaholic-old-price`| CSS class |sPositionOldPriceClass| Class of node with old offer price |
+| `data-shopaholic-position-id` | Data attribute |positionIdAttr| Contain position id |
 
 Also you should set correct path to cart-mini button partial or use default: 
-`this.sDefaultCartMiniPath = 'product/cart/cart-mini/cart-info/cart-info-button`
+`this.sDefaultCartMiniPath = 'product/cart/cart-mini/cart-info/cart-info-button`. For rewrite it you can to use `sDefaultCartMiniPath` key
 
 
 ```html
@@ -145,13 +144,11 @@ Send ajax request and update cart data object. Also update offer price;
 ## getOfferQuantity(iOfferID) ⇒ <code>int</code>
 Get offer quantity from cart object
 
-**Kind**: global function  
 
 | Param | Type |
 | --- | --- |
 | iOfferID | <code>int</code> | 
 
-<a name="findCartPosition"></a>
 
 ## findCartPosition(iItemID, sItemType) ⇒ <code>object</code>
 Find cart position by item ID and type
@@ -163,18 +160,18 @@ Find cart position by item ID and type
 
 ## **Shopaholic-change-product-quantity**
 
-Helper class will allow you to methods to increase/decrease value in input without AJAX 
+Helper class will allow you to methods to increase/decrease  input`s value
 
 ### Basic usage
 
 You should use this css class for correct package work
 
-| Selector | Type |Description |
-| --- | --- | --- |
-| `_shopaholic-quantity-wrapper` | CSS class | Wrapper of change-quantity partial |
-|`_shopaholic-decrease-quantity-button`| CSS class | Decrease button |
-|`_shopaholic-increase-quantity-button`| CSS class | Increase button |
-| `_shopaholic-quantity-input` | CSS Class | Quantity input |
+| Selector | Type |Key |Description |
+| --- | --- | --- | --- |
+| `_shopaholic-quantity-wrapper` | CSS class |sQuantitySectionWrapper| Wrapper of change-quantity partial |
+|`_shopaholic-decrease-quantity-button`| CSS class | sDecreaseBtnSelector | Decrease button |
+|`_shopaholic-increase-quantity-button`| CSS class | sIncreaseBtnSelector| Increase button |
+| `_shopaholic-quantity-input` | CSS Class | sInputSelector| Quantity input |
 
 ```html
 <div class="cart-product__quantity _shopaholic-quantity-wrapper">

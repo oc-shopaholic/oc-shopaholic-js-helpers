@@ -7,7 +7,7 @@ export default class ChangeProductQuantity {
     this.sQuantitySectionWrapper = '_shopaholic-quantity-wrapper';
     this.sDecreaseBtnSelector = '_shopaholic-decrease-quantity-button';
     this.sIncreaseBtnSelector = '_shopaholic-increase-quantity-button';
-    this.inputSelector = '_shopaholic-quantity-input';
+    this.sInputSelector = '_shopaholic-quantity-input';
 
     this.radix = 10;
   }
@@ -68,7 +68,7 @@ export default class ChangeProductQuantity {
    */
   getQuantityInput(button) {
     const inputWrapper = button.closest(`.${this.sQuantitySectionWrapper}`);
-    const input = inputWrapper.querySelector(`.${this.inputSelector}`);
+    const input = inputWrapper.querySelector(`.${this.sInputSelector}`);
 
     return input;
   }
