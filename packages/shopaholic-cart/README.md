@@ -3,189 +3,380 @@
 Package adds helper methods for integration with [Orders for Shopaholic](https://octobercms.com/plugin/lovata-ordersshopaholic)
 and [Shopaholic](https://octobercms.com/plugin/lovata-shopaholic) plugins.
 
-Package will allow you to quickly add cart, checkout page in your project.
+Package will allow you to quickly add/update/remove product in cart buttons, change product quantity and etc.
 
-## installation
+#### installation
 
 ```bash
 npm install @lovata/shopaholic-cart
 ```
 
-## **Shopaholic-cart-manipulation**
+#### Introduction
 
-Class will allow you to quickly add "Add to cart", "Remove from cart"  button in your project.
+This package has 5 classes in it contains.
 
-### Basic usage
 
-You should use this css class for correct package work or change it after class initialization
+| Class | Role  |
+| --- | --- |
+| `shopaholic-card-helper` | Get information about quantity, position and etc of product in cart  |
+| `shopaholic-card-add` | Add product to cart  |
+| `shopaholic-card-remove` | Remove product from cart  |
+| `shopaholic-card-update` | Update cart. Also contain change-quantity handler  |
+| `shopaholic-change-product-quantity` | Contain logic for increase/decrease value of quantity input. Also triggering onInput event  |
 
-| Selector | Type |Key |Description |
-| --- | --- | --- | --- |
-| `_shopaholic-add-to-cart` | CSS class | sButtonClass |Class for buy button |
-| `_shopaholic-product-wrapper` | CSS class |sWrapperClass| Product card wrapper |
-| `_shopaholic-quantity-input` | CSS class |sQuantityInputClass|Input with product quantity. Default quantity = 1 |
-| `_shopaholic-cart-total-price` | CSS class |sTotalPriceWrapperClass| Wrapper for partial with total price |
-| `offer_id` | Input name |sOfferIdAttr| `Input` name using as ID for search `offer id` |
+ One of them must be used: this is `shopaholic-cart-helper` class.
+`shopaholic-cart-helper` get some methods which will be use in all other classes.
 
-Also you should set correct path to total price partial or use default: 
-`product/cart/cart-mini/cart-mini-price/cart-mini-price`. For rewrite you can use `.sDefaultTotalPricePartial` key
+Besides product card must be have some required fields: input, 'select' or radio buttons collection with offer ID.
 
-## Add to cart from page
-
-```html
-<section class="_shopaholic-product-wrapper">
-    <div class="product-size">
-        <input type="hidden" name="offer_id" value="{{ obOffer.id }}" checked>
-    </div>
-    <button class="_shopaholic-add-to-cart">
-        Add To Cart
-    </button>
-</section>
-```
+#### Example of Initialization
 
 ```javascript
-import ShopaholicCartManipulation from "@lovata/shopaholic-cart/shopaholic-cart-manipulation";
+    import CartHelper from '@lovata/shopaholic-cart/shopaholic-cart-helper';
+    import AddToCart from  '@lovata/shopaholic-cart/shopaholic-cart-add';
 
-const CartManipulation = new ShopaholicAddWishList();
-CartManipulation.init();
+    export default new class CartManipulation {
+      constructor() {
+        // Create CartHelper instance
+        this.CartHelper = new CartHelper();
+
+        // Declare object with partials who will bi update
+        this.obPartialUpdate = {
+          'product/cart/cart-total': '._shopaholic-cart-total-price',
+          'product/cart/cart-mini/cart-info-button': '._shopaholic-cart-button-wrapper',
+        };
+
+        // Create AddToCart instance. Pass the helper instance as an argument
+        this.AddToCart = new AddToCart(this.CartHelper);
+
+        // Init click handler for buy button (or you can call callback function manually)
+        this.AddToCart.initClickHandler();
+
+        // Mutate ajax request object with an array of partials
+        this.AddToCart.obRequestData.update = this.obPartialUpdate;
+      }
+    }
 ```
 
-### Methods
+#### Class description
 
-## init()
-Init click handler
+## Shopaholic helper class
 
-## add(iOfferID, quantity, button, forceAdd)
-Add product to cart
+__Options__
 
-| Param | Type | Description |
-| --- | --- | --- |
-| iOfferID | <code>int</code> | Offer ID |
-| quantity | <code>int</code> | Product quantity |
-| button | <code>node</code> | Add to cart button |
-| forceAdd | <code>boolean</code> | Sets the forced method `this.sAddComponentMethod` |
-
-##remove(removeBtnNode)
-
-| Param | Type | Description |
-| --- | --- | --- |
-| removeBtnNode | <code>Node</code> | Remove product from cart | 
-
-## getOfferId(obProduct) ⇒ <code>int</code>
-Get offer ID from attribute
-
-| Param | Type | Description |
-| --- | --- | --- |
-| obProduct | <code>int</code> | Return Offer ID from product card | 
-
-
-## getIdFromRadioCollection(collection) ⇒ <code>node</code>
-Get checked radio button
-
-| Param | Type | Description |
-| --- | --- | --- |
-| collection | <code>DOM nodes collection</code> | Return input with product `offer_id` | 
-
-
-## getOfferIdInputType(iProductIdNodeCollection) ⇒ <code>boolean</code>
-Detect type of input with offer id
-
-| Param | Type | Description |
-| --- | --- | --- |
-| iProductIdNodeCollection | <code>DOM nodes collection</code> | Return true if input with offer_id is `radio button` |
-
-## get/set obRequestData()  ⇒ <code>object</code>
-Getter/setter pair for ajax object
-You should use it if you want to change ajax logic
-
-## changeQuantityHandler(input)
-
-| Param | Type | Description |
-| --- | --- | --- |
-| iProductIdNodeCollection | <code>Node</code> | Handler for change product quantity in cart |
-
-## **Shopaholic-cart-info**
-
-Helper class will allow you to methods for work with response object and update `cart mini button` and `position price`.
-
-### Basic usage
-
-You should use this css class for correct package work or change it after class initialization
-
-| Selector | Type |Key |Description |
+| Option | Type |Default |Description |
 | --- | --- | --- | --- |
-| `_shopaholic-cart-button-wrapper` | CSS class |sCartMiniWrapperClass| Class of button for open mini-cart |
-|`_shopaholic-current-price`| CSS class |sPositionCurrentPriceClass| Class of node with current offer price |
-|`_shopaholic-old-price`| CSS class |sPositionOldPriceClass| Class of node with old offer price |
-| `data-shopaholic-position-id` | Data attribute |positionIdAttr| Contain position id |
+| `sOfferIdAttr` | Input name | offer_id | Storage for offer id |
+| `sPositionIdAttr` | Data-attr |data-shopaholic-position-id| Cart item position id storage. At same time it`s selector for wrapper of cart item price. Use it if you need update position price |
+| `sPositionCurrentPriceClass` | CSS class |_shopaholic-current-price|Node with current position price|
+| `sPositionOldPriceClass` | CSS class |_shopaholic-old-price| Node with current position price|
+|`sGetDataHandler`|Name of ajax handler|Cart::onGetData|Handler for getting information about cart|
 
-Also you should set correct path to cart-mini button partial or use default: 
-`this.sDefaultCartMiniPath = 'product/cart/cart-mini/cart-info/cart-info-button`. For rewrite it you can to use `sDefaultCartMiniPath` key
-
-
-```html
-<section class="_shopaholic-product-wrapper">
-    <div class="product-size">
-        <input type="hidden" name="offer_id" value="{{ obOffer.id }}" checked>
-    </div>
-    <div class="cart-product__price" data-shopaholic-position-id="{{ obPosition.id }}">
-        <span class="cart-product__price-currency">$</span>
-        <span class="cart-product__price-value _shopaholic-current-price">89.40</span>  
-        <span class="cart-product__price-value _shopaholic-old-price">189.40</span>      
-    </div>
-</section>
-```
-
-### Methods
-
-## updateCartData(button) 
-Send ajax request and update cart data object. Also update offer price;
-
-## getOfferQuantity(iOfferID) ⇒ <code>int</code>
-Get offer quantity from cart object
-
-
-| Param | Type |
-| --- | --- |
-| iOfferID | <code>int</code> | 
-
-
-## findCartPosition(iItemID, sItemType) ⇒ <code>object</code>
-Find cart position by item ID and type
-
-| Param | Type |
-| --- | --- |
-| iItemID | <code>int</code> | 
-| sItemType | <code>string</code> |
-
-## **Shopaholic-change-product-quantity**
-
-Helper class will allow you to methods to increase/decrease  input`s value
-
-### Basic usage
-
-You should use this css class for correct package work
-
-| Selector | Type |Key |Description |
-| --- | --- | --- | --- |
-| `_shopaholic-quantity-wrapper` | CSS class |sQuantitySectionWrapper| Wrapper of change-quantity partial |
-|`_shopaholic-decrease-quantity-button`| CSS class | sDecreaseBtnSelector | Decrease button |
-|`_shopaholic-increase-quantity-button`| CSS class | sIncreaseBtnSelector| Increase button |
-| `_shopaholic-quantity-input` | CSS Class | sInputSelector| Quantity input |
-
-```html
-<div class="cart-product__quantity _shopaholic-quantity-wrapper">
-    <button type="button" class="_shopaholic-decrease-quantity-button" aria-label="Decrease quantity">-</button>
-    <label for="input">Select quantity</label>
-    <input class="_shopaholic-quantity-input" id="input" type="text" min="1" max="92" value="1" disabled="">
-    <button type="button" class="_shopaholic-increase-quantity-button" aria-label="Increase quantity">+</button>
-</div>
-```
+__Implementation__
 
 ```javascript
-  
-  import ChangeProductQuantity from '@lovata/shopaholic-cart/shopaholic-change-product-quantity';
-    const changeProductQuantity = new ChangeProductQuantity();
+    import CartHelper from '@lovata/shopaholic-cart/shopaholic-cart-helper';
 
-    changeProductQuantity.init();
+    export default new class CartManipulation {
+      constructor() {
+        // Create CartHelper instance
+        this.CartHelper = new CartHelper();
+
+        // Change options of you need `NOT RECOMMENDED`
+        this.CartHelper.sOfferIdAttr = 'other_attr'
+
+        // Init other shopaholic-cart classes
+      }
+    }
 ```
+
+## Shopaholic-cart-add class
+
+__Options__
+
+| Option | Type |Default |Description |
+| --- | --- | --- | --- |
+|`helper`|instance of cart-helper class|none|Must be define|
+| `sWrapperClass`| CSS class | _shopaholic-product-wrapper | Wrapper of cart product card |
+| `sButtonClass` |  CSS class|_shopaholic-add-to-cart| Buy-button class |
+| `completeCallbackFunc`  | Function |Null|Will be call after 'add-to-cart' ajax|
+| `sAddComponentMethod`   | Ajax handler |Cart::onAdd| Add to cart handler|
+| `sUpdateComponentMethod`|Ajax handler |Cart::onUpdate|Cart update handler|
+| `obAjaxRequestCallback` |Object|{}|Object with ajax settings. |
+
+__Implementation example__
+
+```javascript
+    import CartHelper from '@lovata/shopaholic-cart/shopaholic-cart-helper';
+    import AddToCart from  '@lovata/shopaholic-cart/shopaholic-cart-add';
+
+    export default new class CartManipulation {
+      constructor() {
+        // Create CartHelper instance
+        this.CartHelper = new CartHelper();
+
+        // Declare object with partials who will bi update
+        this.obPartialUpdate = {
+          'product/cart/cart-total': '._shopaholic-cart-total-price',
+          'product/cart/cart-mini/cart-info-button': '._shopaholic-cart-button-wrapper',
+        };
+
+        // Create AddToCart instance. Pass the helper instance as an argument
+        this.AddToCart = new AddToCart(this.CartHelper);
+
+        // Init click handler for buy button (or you can call callback function manually)
+        this.AddToCart.initClickHandler();
+
+        // Mutate ajax request object with an array of partials
+        this.AddToCart.obRequestData.update = this.obPartialUpdate;
+      }
+    }
+```
+
+```html
+    <section class="_shopaholic-product-wrapper">
+        <input type="hidden" class="filter-size__checkbox" id="size-l" name="offer_id" value="10">
+        <button class="_shopaholic-add-to-cart">Add to cart</button>
+    </section>
+```
+
+## Methods
+
+#### initClickHandler
+
+Add onclick handler on buy-button
+
+#### eventHandlerCallback(obEvent)
+
+Handler for buy-button. `obEvent`  - event object. Add product to cart
+
+#### add(iOfferID, quantity, button)
+
+| Option | Type |Description |
+| --- | --- | --- |
+| `iOfferID`| int| Offer id |
+| `quantity`| int| Offer quantity |
+| `button`| DOM node| Buy-button node |
+
+#### obRequestData()
+
+Getter/setter pair. Accepts or gives away ajax settings
+
+
+## Shopaholic-cart-remove class
+
+__Options__
+
+| Option | Type |Default |Description |
+| --- | --- | --- | --- |
+|`helper`|instance of cart-helper class|none|Must be define|
+| `sWrapperClass`| CSS class | _shopaholic-product-wrapper | Wrapper of cart product card |
+| `completeCallbackFunc`  | Function |Null|Will be call after 'add-to-cart' ajax|
+| `sRemoveComponentMethod`|Ajax handler |Cart::onRemove|Cart remove handler|
+| `obAjaxRequestCallback` |Object|{}|Object with ajax settings. |
+
+__Implementation example__
+
+```javascript
+    import CartHelper from '@lovata/shopaholic-cart/shopaholic-cart-helper';
+    import RemoveFromCart from  '@lovata/shopaholic-cart/shopaholic-cart-remove';
+
+    export default new class CartManipulation {
+      constructor() {
+        // Create CartHelper instance
+        this.CartHelper = new CartHelper();
+
+        // Declare object with partials who will bi update
+        this.obPartialUpdate = {
+          'product/cart/cart-total': '._shopaholic-cart-total-price',
+          'product/cart/cart-mini/cart-info-button': '._shopaholic-cart-button-wrapper',
+        };
+
+        // Create AddToCart instance. Pass the helper instance as an argument
+        this.RemoveFromCart = new RemoveFromCart(this.CartHelper);
+
+        // Mutate ajax request object with an array of partials
+        this.RemoveFromCart.obRequestData.update = this.obPartialUpdate;
+      }
+
+      removeHandler() {
+        $(document).on('click', `.${this.removeBtnSelector}`, ({ currentTarget }) => {
+          this.RemoveFromCart.remove(currentTarget);
+         });
+      }
+    }
+```
+
+```html
+    <section class="_shopaholic-product-wrapper">
+        <input type="hidden" class="filter-size__checkbox" id="size-l" name="offer_id" value="10">
+        <button class="_shopaholic-remove-to-cart">Remove from cart</button>
+    </section>
+```
+
+## Methods
+
+#### remove(removeBtnNode)
+
+Remove product from cart. 
+
+| Option | Type |Description |
+| --- | --- | --- | --- |
+|`removeBtnNode`|DOM node|delete node button|
+
+#### obRequestData()
+
+Getter/setter pair. Accepts or gives away ajax settings
+
+## Shopaholic-cart-update class
+
+__Options__
+
+| Option | Type |Default |Description |
+| --- | --- | --- | --- |
+|`helper`|instance of cart-helper class|none|Must be define|
+| `sWrapperClass`| CSS class | _shopaholic-product-wrapper | Wrapper of cart product card |
+| `completeCallbackFunc`  | Function |Null|Will be call after 'add-to-cart' ajax|
+| `sUpdateComponentMethod`|Ajax handler |Cart::onUpdate|Cart update handler|
+| `obAjaxRequestCallback` |Object|{}|Object with ajax settings. |
+| `completeCallbackFunc`  | Function |Null|Will be call after 'add-to-cart' ajax|
+|`iDelayBeforeRequest`|int|400|Delay before updating request|
+
+__Implementation example__
+
+```javascript
+    import CartHelper from '@lovata/shopaholic-cart/shopaholic-cart-helper';
+    import UpdateCart from  '@lovata/shopaholic-cart/shopaholic-cart-update';
+    import ChangeProductQuantity from '@lovata/shopaholic-cart/shopaholic-change-product-quantity';
+
+    export default new class CartManipulation {
+      constructor() {
+        // Create CartHelper instance
+        this.CartHelper = new CartHelper();
+
+        // Declare object with partials who will bi update
+        this.obPartialUpdate = {
+          'product/cart/cart-total': '._shopaholic-cart-total-price',
+          'product/cart/cart-mini/cart-info-button': '._shopaholic-cart-button-wrapper',
+        };
+
+        // Create UpdateCart instance. Pass the helper instance as an argument
+        this.UpdateCart = new UpdateCart(this.CartHelper);
+
+        // Mutate ajax request object with an array of partials
+        this.UpdateCart.obRequestData.update = this.obPartialUpdate;
+
+        // OnInput hander
+        this.updateCart.changeQuantityHandlerInit();
+
+        this.init();
+      }
+
+      init() {
+          const changeProductQuantity = new ChangeProductQuantity();
+
+          changeProductQuantity.init();
+      }
+    }
+```
+
+```html
+    <section class="_shopaholic-product-wrapper">
+        <input type="hidden" class="filter-size__checkbox" id="size-l" name="offer_id" value="10">
+        <div class="_shopaholic-quantity-wrapper">
+            <!-- Section for increase/decrease product quantity in cart -->
+            <button type="button" class="_shopaholic-decrease-quantity-button">-</button>
+            <input class="_shopaholic-quantity-input" min="1" max="80" name="" value="1" disabled="">
+            <button type="button" class="_shopaholic-increase-quantity-button">+</button>
+        </div>
+    </section>
+```
+
+## Methods
+
+#### changeQuantityHandlerInit
+
+Await onInput event on `sQuantityInputClass` and trigger `changeQuantityHandler()`
+
+#### changeQuantityHandler(eventInput)
+
+Update product quantity according `eventInput` value
+
+#### obRequestData()
+
+Getter/setter pair. Accepts or gives away ajax settings
+
+#### update(obData = {})
+
+Ajax request for cart updating. `obData`  - object with `data` request settings 
+
+#### getCurrentQuantity(input)
+
+Return input value
+
+## shopaholic-change-product-quantity class
+
+__Options__
+
+| Option | Type |Default |Description |
+| --- | --- | --- | --- |
+| `sQuantitySectionWrapper`| CSS class | _shopaholic-quantity-wrapper | Wrapper of change quantity section |
+| `sDecreaseBtnSelector`  | CSS class |_shopaholic-decrease-quantity-button|Decrease button|
+| `sIncreaseBtnSelector`|CSS class |_shopaholic-increase-quantity-button|Increase button|
+| `obAjaxRequestCallback` |CSS class|_shopaholic-quantity-input|Quantity input|
+
+__Implementation example__
+
+```javascript
+    import CartHelper from '@lovata/shopaholic-cart/shopaholic-cart-helper';
+    import UpdateCart from  '@lovata/shopaholic-cart/shopaholic-cart-update';
+    import ChangeProductQuantity from '@lovata/shopaholic-cart/shopaholic-change-product-quantity';
+
+    export default new class CartManipulation {
+      constructor() {
+        // Create CartHelper instance
+        this.CartHelper = new CartHelper();
+
+        // Declare object with partials who will bi update
+        this.obPartialUpdate = {
+          'product/cart/cart-total': '._shopaholic-cart-total-price',
+          'product/cart/cart-mini/cart-info-button': '._shopaholic-cart-button-wrapper',
+        };
+
+        // Create UpdateCart instance. Pass the helper instance as an argument
+        this.UpdateCart = new UpdateCart(this.CartHelper);
+
+        // Mutate ajax request object with an array of partials
+        this.UpdateCart.obRequestData.update = this.obPartialUpdate;
+
+        // OnInput hander
+        this.updateCart.changeQuantityHandlerInit();
+
+        this.init();
+      }
+
+      init() {
+          const changeProductQuantity = new ChangeProductQuantity();
+
+          changeProductQuantity.init();
+      }
+    }
+```
+
+```html
+    <section class="_shopaholic-product-wrapper">
+        <input type="hidden" class="filter-size__checkbox" id="size-l" name="offer_id" value="10">
+        <div class="_shopaholic-quantity-wrapper">
+            <!-- Section for increase/decrease product quantity in cart -->
+            <button type="button" class="_shopaholic-decrease-quantity-button">-</button>
+            <input class="_shopaholic-quantity-input" min="1" max="80" name="" value="1" disabled="">
+            <button type="button" class="_shopaholic-increase-quantity-button">+</button>
+        </div>
+    </section>
+```
+
+## Methods
+
+#### init()
+
+Add onclick handler for increase/decrease button

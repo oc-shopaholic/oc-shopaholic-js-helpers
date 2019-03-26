@@ -6,7 +6,6 @@ export default class ShopaholicAddCart {
   constructor(helper) {
     this.sButtonClass = '_shopaholic-add-to-cart';
     this.sWrapperClass = '_shopaholic-product-wrapper';
-    this.sOfferIdAttr = 'offer_id';
 
     this.obAjaxRequestCallback = {};
     this.completeCallbackFunc = null;
@@ -32,7 +31,6 @@ export default class ShopaholicAddCart {
       this.eventHandlerCallback(obEvent);
     });
   }
-
 
   /**
    * @param {object} obEvent
