@@ -15,10 +15,7 @@ export default new class popupHelper {
     this.pageOffset = '';
   }
 
-
   /**
-   * 
-   * 
    * @param {string} cssClass
    * @description Set custom css class for 'body';
    */
@@ -43,7 +40,6 @@ export default new class popupHelper {
   }
 
   /**
-   * 
    * @description Complex method. Depending  @param needScroll toggle class on body, 
    * save or set scroll position and padding to avoid shifting content 
    * @param {boolean}  
@@ -64,8 +60,6 @@ export default new class popupHelper {
   }
 
   /**
-   * 
-   * 
    * @param {boolena} needTrap if true - enable focus trap
    * @param {node} modal node of modal window
    */
@@ -80,11 +74,8 @@ export default new class popupHelper {
     }
   }
 
-
   /**
-   * 
-   * 
-   * @static
+    * @static
    * @returns scrollBar width
    */
   static getScrollBarWidth() {
@@ -99,7 +90,6 @@ export default new class popupHelper {
     const scrollWidth = this.constructor.getScrollBarWidth();
     document.body.style.setProperty(this.bodyPaddingProp, `${scrollWidth}px`);
   }
-  
     
   /**
    * @description Return false if overlay was create
@@ -110,10 +100,8 @@ export default new class popupHelper {
     const overlay = this.getOverlay();
     return !!overlay;
   }
-
   
   /**
-   * 
    * @param {boolean} needOverlay 
    * @description if @param needOverlay is true create Node for overlay, else remove it
    */
@@ -127,8 +115,6 @@ export default new class popupHelper {
   }
 
   /**
-   * 
-   * 
    * @param {boolean} isInit 
    * @param {node} closeBtnNode 
    * @param {node} modalNode 
@@ -146,8 +132,6 @@ export default new class popupHelper {
   }
 
   /**
-   * 
-   * 
    * @description Create overlay node
    */
   createOverlay() {
@@ -159,11 +143,8 @@ export default new class popupHelper {
 
     body.append(div);
   }
-
   
   /**
-   * 
-   * 
    * @description Remove overlay node
    */
   removeOverlay() {
@@ -172,20 +153,14 @@ export default new class popupHelper {
     $(`.${this.overlaySelector}`).remove();
   }
 
-
   /**
-   * 
-   * 
    * @returns overlay node
    */
   getOverlay() {
     return document.querySelector(`.${this.overlaySelector}`);
   }
 
-
   /**
-   * 
-   * 
    * @param {node} triggerTarget Node for close modal window
    * @description Add 'click' handler to overlay 
    */
@@ -198,11 +173,8 @@ export default new class popupHelper {
       triggerTarget.click();
     });
   }
-
   
   /**
-   * 
-   * 
    * @param {node} triggerTarget Node for close modal window
    * @param {node} modalNode  Node of modal window
    * @description  Add esc button handler
