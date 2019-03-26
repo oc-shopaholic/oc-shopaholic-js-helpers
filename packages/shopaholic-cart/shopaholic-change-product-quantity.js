@@ -7,9 +7,9 @@ export default class ChangeProductQuantity {
     this.sQuantitySectionWrapper = '_shopaholic-quantity-wrapper';
     this.sDecreaseBtnSelector = '_shopaholic-decrease-quantity-button';
     this.sIncreaseBtnSelector = '_shopaholic-increase-quantity-button';
-    this.sInputSelector = '_shopaholic-quantity-input';
+    this.inputSelector = '_shopaholic-quantity-input';
 
-    this.radix = 10;
+    this.iRadix = 10;
   }
 
 
@@ -19,7 +19,6 @@ export default class ChangeProductQuantity {
   }
 
   /**
-   *
    * @description Init click handler on increase button
    * @memberof ChangeProductQuantity
    */
@@ -27,12 +26,12 @@ export default class ChangeProductQuantity {
     $(document).on('click', `.${this.sIncreaseBtnSelector}`, ({ currentTarget }) => {
       const input = this.getQuantityInput(currentTarget);
       const { value } = input;
-      const iValue = parseInt(value, this.radix);
+      const iValue = parseInt(value, this.iRadix);
       const max = input.getAttribute('max');
 
       if (!max) throw new Error('Max attribute is empty');
 
-      if (iValue < parseInt(max, this.radix)) {
+      if (iValue < parseInt(max, this.iRadix)) {
         input.value = iValue + 1;
         input.dispatchEvent(this.constructor.createOnInputEvent());
       }
@@ -41,7 +40,6 @@ export default class ChangeProductQuantity {
 
 
   /**
-   *
    * @description Init click handler on decrease button
    * @memberof ChangeProductQuantity
    */
@@ -50,16 +48,15 @@ export default class ChangeProductQuantity {
       const input = this.getQuantityInput(currentTarget);
 
       const { value } = input;
-      const iValue = parseInt(value, this.radix);
+      const iValue = parseInt(value, this.iRadix);
 
 
       if (iValue > 1) {
-        input.value = parseInt(iValue, this.radix) - 1;
+        input.value = parseInt(iValue, this.iRadix) - 1;
         input.dispatchEvent(this.constructor.createOnInputEvent());
       }
     });
   }
-
 
   /**
    * @param {node} button
@@ -68,14 +65,12 @@ export default class ChangeProductQuantity {
    */
   getQuantityInput(button) {
     const inputWrapper = button.closest(`.${this.sQuantitySectionWrapper}`);
-    const input = inputWrapper.querySelector(`.${this.sInputSelector}`);
+    const input = inputWrapper.querySelector(`.${this.inputSelector}`);
 
     return input;
   }
 
-
   /**
-   *
    * @description Return oninput event
    * @static
    * @returns {object}
