@@ -35,18 +35,25 @@ export default class ShopaholicFilterPrice {
 
       this.obProductListHelper.send();
     });
+
+    $(document).on('input', this.sInputSelector, ({ currentTarget }) => {
+      const { value } = currentTarget;
+      const correctValue = value.replace(/[^\d.]/g, '');
+
+      currentTarget.value = correctValue; // eslint-disable-line no-param-reassign
+    });
   }
 
   prepareRequestData() {
-    //Get min price from filter input
-    const obInputList = $(this.setInputSelector),
-      obMinInput = obInputList.find(`[name=${this.sInputMinPriceName}]`),
-      obMaxInput = obInputList.find(`[name=${this.sInputMaxPriceName}]`),
-      fMinLimit = parseFloat(obMinInput.attr('min')),
-      fMaxLimit = parseFloat(obMinInput.attr('max'));
+    // Get min price from filter input
+    const obInputList = $(this.setInputSelector);
+    const obMinInput = obInputList.find(`[name=${this.sInputMinPriceName}]`);
+    const obMaxInput = obInputList.find(`[name=${this.sInputMaxPriceName}]`);
+    const fMinLimit = parseFloat(obMinInput.attr('min'));
+    const fMaxLimit = parseFloat(obMinInput.attr('max'));
 
-    let fMinPrice = obMinInput.val(),
-      fMaxPrice = obMaxInput.val();
+    let fMinPrice = obMinInput.val();
+    let fMaxPrice = obMaxInput.val();
 
     if (fMinPrice > 0 && fMinPrice < fMinLimit) {
       fMinPrice = fMinLimit;
@@ -58,7 +65,7 @@ export default class ShopaholicFilterPrice {
       obMaxInput.val(fMaxLimit);
     }
 
-    if (fMinPrice == 0 && fMaxPrice == 0) {
+    if (fMinPrice === 0 && fMaxPrice === 0) {
       UrlGeneration.remove(this.sFiledName);
     } else {
       UrlGeneration.set(this.sFiledName, [fMinPrice, fMaxPrice]);
