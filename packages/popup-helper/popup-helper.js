@@ -75,7 +75,7 @@ export default new class popupHelper {
   }
 
   /**
-    * @static
+   * @static
    * @returns scrollBar width
    */
   static getScrollBarWidth() {
