@@ -119,21 +119,21 @@ export default class CartHelper {
    */
 
   changePrice(id, arPosition) {
-    const priceNode = document.querySelector(`[${this.positionIdAttr}="${id}"]`);
+    const priceNode = document.querySelectorAll(`[${this.positionIdAttr}="${id}"]`);
 
     if (!priceNode) return;
 
-    const currentPriceNode = priceNode.querySelector(`.${this.sPositionCurrentPriceClass}`);
+    [...priceNode].forEach(node => this.setNewPrice(node, arPosition, id));
+  }
 
+  setNewPrice(priceNode, arPosition, id) {
+    const currentPriceNode = priceNode.querySelectorAll(`.${this.sPositionCurrentPriceClass}`);
     if (!currentPriceNode) return;
+    [...currentPriceNode].forEach((node) => { node.innerHTML = arPosition[id].price; });
 
-    currentPriceNode.innerHTML = arPosition[id].price;
-
-    const oldPriceNode = priceNode.querySelector(`.${this.sPositionOldPriceClass}`);
-
+    const oldPriceNode = priceNode.querySelectorAll(`.${this.sPositionOldPriceClass}`);
     if (!oldPriceNode) return;
-
-    oldPriceNode.innerHTML = arPosition[id].old_price;
+    [...oldPriceNode].forEach((node) => { node.innerHTML = arPosition[id].old_price; });
   }
 
   /**
@@ -147,7 +147,6 @@ export default class CartHelper {
     }
 
     const iProductIdNodeCollection = obProduct.querySelectorAll(`[name=${this.sOfferIdAttr}]`);
-
 
     if (!iProductIdNodeCollection) {
       throw new Error('Product ID was not found');
