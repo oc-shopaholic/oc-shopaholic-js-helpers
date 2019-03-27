@@ -221,7 +221,7 @@ __Implementation example__
 Remove product from cart. 
 
 | Option | Type |Description |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 |`removeBtnNode`|DOM node|delete node button|
 
 #### obRequestData()
