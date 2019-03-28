@@ -82,7 +82,6 @@ export default class ShopaholicAddCart {
       },
       complete: () => {
         this.CartHelper.updateCartData(button);
-        this.CartHelper.updateLocalPrice();
 
         if (this.completeCallbackFunc !== null) {
           this.completeCallback();

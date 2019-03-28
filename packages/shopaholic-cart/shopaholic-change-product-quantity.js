@@ -7,11 +7,10 @@ export default class ChangeProductQuantity {
     this.sQuantitySectionWrapper = '_shopaholic-quantity-wrapper';
     this.sDecreaseBtnSelector = '_shopaholic-decrease-quantity-button';
     this.sIncreaseBtnSelector = '_shopaholic-increase-quantity-button';
-    this.sInputSelector = '_shopaholic-quantity-input';
+    this.inputSelector = '_shopaholic-quantity-input';
 
-    this.iRadix = 10;
+    this.radix = 10;
   }
-
 
   init() {
     this.increaseHandler();
@@ -23,49 +22,50 @@ export default class ChangeProductQuantity {
    * @memberof ChangeProductQuantity
    */
   increaseHandler() {
-    $(document).on('click', `.${this.sIncreaseBtnSelector}`, ({ currentTarget }) => {
-      const input = this.getQuantityInput(currentTarget);
-      const { value } = input;
-      const iValue = parseInt(value, this.iRadix);
-      const max = input.getAttribute('max');
+    $(document).on('click', `.${this.sIncreaseBtnSelector}`, () => {
+      const inputList = this.getQuantityInput();
 
-      if (!max) throw new Error('Max attribute is empty');
+      [...inputList].forEach((input) => {
+        const { value } = input;
+        const iValue = parseInt(value, this.radix);
+        const max = input.getAttribute('max');
 
-      if (iValue < parseInt(max, this.iRadix)) {
-        input.value = iValue + 1;
-        input.dispatchEvent(this.constructor.createOnInputEvent());
-      }
+        if (!max) throw new Error('Max attribute is empty');
+
+        if (iValue < parseInt(max, this.radix)) {
+          input.value = iValue + 1; // eslint-disable-line no-param-reassign
+          input.dispatchEvent(this.constructor.createOnInputEvent());
+        }
+      });
     });
   }
-
 
   /**
    * @description Init click handler on decrease button
    * @memberof ChangeProductQuantity
    */
   decreaseHandler() {
-    $(document).on('click', `.${this.sDecreaseBtnSelector}`, ({ currentTarget }) => {
-      const input = this.getQuantityInput(currentTarget);
+    $(document).on('click', `.${this.sDecreaseBtnSelector}`, () => {
+      const inputList = this.getQuantityInput();
 
-      const { value } = input;
-      const iValue = parseInt(value, this.iRadix);
+      [...inputList].forEach((input) => {
+        const { value } = input;
+        const iValue = parseInt(value, this.radix);
 
-
-      if (iValue > 1) {
-        input.value = parseInt(iValue, this.iRadix) - 1;
-        input.dispatchEvent(this.constructor.createOnInputEvent());
-      }
+        if (iValue > 1) {
+          input.value = parseInt(iValue, this.radix) - 1; // eslint-disable-line no-param-reassign
+          input.dispatchEvent(this.constructor.createOnInputEvent());
+        }
+      });
     });
   }
 
   /**
-   * @param {node} button
    * @returns {node} Input with product quantity
    * @memberof ChangeProductQuantity
    */
-  getQuantityInput(button) {
-    const inputWrapper = button.closest(`.${this.sQuantitySectionWrapper}`);
-    const input = inputWrapper.querySelector(`.${this.sInputSelector}`);
+  getQuantityInput() {
+    const input = document.querySelectorAll(`.${this.inputSelector}`);
 
     return input;
   }
