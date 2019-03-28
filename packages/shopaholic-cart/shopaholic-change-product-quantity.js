@@ -9,7 +9,7 @@ export default class ChangeProductQuantity {
     this.sIncreaseBtnSelector = '_shopaholic-increase-quantity-button';
     this.inputSelector = '_shopaholic-quantity-input';
 
-    this.radix = 10;
+    this.iRadix = 10;
   }
 
   init() {
@@ -27,12 +27,12 @@ export default class ChangeProductQuantity {
 
       [...inputList].forEach((input) => {
         const { value } = input;
-        const iValue = parseInt(value, this.radix);
+        const iValue = parseInt(value, this.iRadix);
         const max = input.getAttribute('max');
 
         if (!max) throw new Error('Max attribute is empty');
 
-        if (iValue < parseInt(max, this.radix)) {
+        if (iValue < parseInt(max, this.iRadix)) {
           input.value = iValue + 1; // eslint-disable-line no-param-reassign
           input.dispatchEvent(this.constructor.createOnInputEvent());
         }
@@ -50,10 +50,10 @@ export default class ChangeProductQuantity {
 
       [...inputList].forEach((input) => {
         const { value } = input;
-        const iValue = parseInt(value, this.radix);
+        const iValue = parseInt(value, this.iRadix);
 
         if (iValue > 1) {
-          input.value = parseInt(iValue, this.radix) - 1; // eslint-disable-line no-param-reassign
+          input.value = parseInt(iValue, this.iRadix) - 1; // eslint-disable-line no-param-reassign
           input.dispatchEvent(this.constructor.createOnInputEvent());
         }
       });
