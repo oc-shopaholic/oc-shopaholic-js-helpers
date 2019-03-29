@@ -1,3 +1,7 @@
+/**
+ * @author  Uladzimir Ambrazhey, <v.ambrazhey@lovata.com>, LOVATA Group
+ */
+
 export default class ShopaholicUpdateHandler {
   constructor(obOptions = [], obResponse = {}) {
     this.obOptions = obOptions;

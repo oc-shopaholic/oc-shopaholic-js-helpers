@@ -1,3 +1,7 @@
+/**
+ * @author  Uladzimir Ambrazhey, <v.ambrazhey@lovata.com>, LOVATA Group
+ */
+
 import ShopaholicUpdateHandler from './shopaholic-update-handler';
 
 export default class ShopaholicUpdateInfo {
