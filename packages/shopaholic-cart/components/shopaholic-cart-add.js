@@ -1,17 +1,20 @@
 /**
- * @author  Uladzimir Ambrazhey, v.ambrazhey@lovata.com, LOVATA Group
+ * @author  Uladzimir Ambrazhey, <v.ambrazhey@lovata.com>, LOVATA Group
  */
 
 export default class ShopaholicAddCart {
   constructor(helper) {
     this.sButtonClass = '_shopaholic-add-to-cart';
     this.sWrapperClass = '_shopaholic-product-wrapper';
+    this.progressClass = '_shopaholic-loading';
+
+    this.sOfferIdAttr = 'offer_id';
 
     this.obAjaxRequestCallback = {};
-    this.completeCallbackFunc = null;
 
     this.sAddComponentMethod = 'Cart::onAdd';
     this.sUpdateComponentMethod = 'Cart::onUpdate';
+    this.eventName = 'shopaholicCartAdd';
 
     this.iRadix = 10;
 
@@ -25,7 +28,6 @@ export default class ShopaholicAddCart {
   /**
   *  @description Init event handlers
   */
-
   initClickHandler() {
     $(document).on('click', `.${this.sButtonClass}`, (obEvent) => {
       this.eventHandlerCallback(obEvent);
@@ -33,9 +35,7 @@ export default class ShopaholicAddCart {
   }
 
   /**
-   * @param {object} obEvent
-   * @returns
-   * @memberof ShopaholicAddCart
+   * @description Get info and add product to cart
    */
   eventHandlerCallback(obEvent) {
     obEvent.preventDefault();
@@ -52,15 +52,6 @@ export default class ShopaholicAddCart {
   }
 
   /**
-   * @description Return callback function
-   * @returns {object}
-   * @memberof ShopaholicCartUpdate
-   */
-  completeCallback() {
-    return this.completeCallbackFunc();
-  }
-
-  /**
    * @description Add product to cart
    * @param {int} iOfferID
    * @param {int} quantity
@@ -70,22 +61,19 @@ export default class ShopaholicAddCart {
 
   add(iOfferID, quantity, button, bForceAddMethod) {
     if (button) {
+      button.classList.add(this.progressClass);
       button.setAttribute('disabled', 'disabled');
     }
 
-    this.obRequestData = {
+    this.obAjaxRequestCallback = {
       data: {
         cart:
           [
             { offer_id: iOfferID, quantity },
           ],
       },
-      complete: () => {
-        this.CartHelper.updateCartData(button);
-
-        if (this.completeCallbackFunc !== null) {
-          this.completeCallback();
-        }
+      complete: ({ responseJSON }) => {
+        this.completeCallback(responseJSON, button);
       },
     };
 
@@ -96,10 +84,24 @@ export default class ShopaholicAddCart {
     $.request(ajaxHandler, this.obRequestData);
   }
 
+
   /**
-   * @type {setter}
-   * @param {object}
-   * @memberof ShopaholicAddCart
+   *  @description Remove progress styles, update obCartData and call shopaholicCartAdd event
+   */
+  completeCallback(data, button) {
+    this.obCartData = data;
+    this.CartHelper.updateCartData(this.obCartData);
+
+    if (button) {
+      button.removeAttribute('disabled');
+      button.classList.remove(this.progressClass);
+      button.dispatchEvent(this.createCustomEvent());
+    } else {
+      document.dispatchEvent(this.createCustomEvent());
+    }
+  }
+
+  /**
    * @description Set or rewrite request object settings
    */
 
@@ -107,18 +109,26 @@ export default class ShopaholicAddCart {
     const keys = Object.keys(obj);
 
     keys.forEach((key) => {
-      this.obAjaxRequestCallback[key] = obj[key];
+      if (key !== 'complete') {
+        this.obAjaxRequestCallback[key] = obj[key];
+      }
     });
   }
 
   /**
-   * @type {getter}
-   * @readonly
-   * @memberof ShopaholicAddCart
-   * @return {object}
    * @description Return object with request settings
    */
   get obRequestData() {
     return this.obAjaxRequestCallback;
+  }
+
+  createCustomEvent() {
+    const customEvent = new CustomEvent(this.eventName, {
+      bubbles: true,
+      cancelable: false,
+      detail: this.obCartData,
+    });
+
+    return customEvent;
   }
 }

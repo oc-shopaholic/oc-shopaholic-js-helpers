@@ -13,11 +13,11 @@ export default class ShopaholicCartUpdate {
     this.sQuantityInputClass = '_shopaholic-quantity-input';
 
     this.sOfferIdAttr = 'offer_id';
-    this.completeCallbackFunc = null;
     this.obAjaxRequestCallback = {};
 
     this.iRadix = 10;
     this.sUpdateComponentMethod = 'Cart::onUpdate';
+    this.eventName = 'shopaholicCartUpdate';
 
     this.iDelayBeforeRequest = 400;
   }
@@ -45,24 +45,20 @@ export default class ShopaholicCartUpdate {
   }
 
   /**
-   * @type {setter}
-   * @readonly
    * @description Set new settings
-   * @memberof ShopaholicCartUpdate
    */
   set obRequestData(obj) {
     const keys = Object.keys(obj);
 
     keys.forEach((key) => {
-      this.obAjaxRequestCallback[key] = obj[key];
+      if (key !== 'complete') {
+        this.obAjaxRequestCallback[key] = obj[key];
+      }
     });
   }
 
   /**
    * @type {getter}
-   * @readonly
-   * @memberof ShopaholicCartUpdate
-   * @return {object}
    * @description Return object with request settings
    */
   get obRequestData() {
@@ -70,29 +66,18 @@ export default class ShopaholicCartUpdate {
   }
 
   /**
-   * @description Return callback function
-   * @returns {object}
-   * @memberof ShopaholicCartUpdate
-   */
-  completeCallback() {
-    return this.completeCallbackFunc();
-  }
-
-  /**
    * @description Update cart
    * @param {array} [obCart=[]]
-   * @memberof ShopaholicCartUpdate
    */
   update(obData = {}) {
     const data = obData;
-    this.obRequestData = {
+    this.obAjaxRequestCallback = {
       data,
-      complete: () => {
-        this.CartHelper.updateCartData();
+      complete: ({ responseJSON }) => {
+        this.obCartData = responseJSON;
+        this.CartHelper.updateCartData(this.obCartData);
 
-        if (this.completeCallbackFunc !== null) {
-          this.completeCallback();
-        }
+        document.dispatchEvent(this.createCustomEvent());
       },
     };
 
@@ -103,12 +88,19 @@ export default class ShopaholicCartUpdate {
 
   /**
    * @description Return value of quantity input
-   * @param {node} input
-   * @returns {int}
-   * @memberof ShopaholicAddCart
-   */
+     */
 
   getCurrentQuantity(input) {
     return parseInt(input.value, this.iRadix);
+  }
+
+  createCustomEvent() {
+    const customEvent = new CustomEvent(this.eventName, {
+      bubbles: true,
+      cancelable: false,
+      detail: this.obCartData,
+    });
+
+    return customEvent;
   }
 }

@@ -2,50 +2,47 @@
  * @author  Andrey Kharanenka, <a.khoronenko@lovata.com>, LOVATA Group,
  * @author  Uladzimir Ambrazhey, <v.ambrazhey@lovata.com>, LOVATA Group
  */
+import UpdateInfo from './shopaholic-update-info';
 
 export default class CartHelper {
-  constructor() {
+  constructor(obUpdateOptions = []) {
+    /* Selectors */
     this.sItemType = 'Lovata\\Shopaholic\\Models\\Offer';
     this.sOfferIdAttr = 'offer_id';
-
     this.positionIdAttr = 'data-shopaholic-position-id';
-    this.sPositionCurrentPriceClass = '_shopaholic-current-price';
-    this.sPositionOldPriceClass = '_shopaholic-old-price';
 
+    /* Params */
     this.sGetDataHandler = 'Cart::onGetData';
+    this.iRadix = 10;
+    this.obUpdateOptions = obUpdateOptions;
 
+    // Get first info about cart
     this.init();
   }
 
   /**
    * @description Load cart info after page loading;
-   * @memberof Cart
    */
   init() {
-    this.updateCartData();
-  }
-
-  /**
-   * @description Send ajax request and update cart data object
-   * @param {node} button
-   * @memberof Cart
-   */
-  updateCartData(button) {
     $.request(this.sGetDataHandler, {
       complete: ({ responseJSON }) => {
         this.obCartData = responseJSON;
-        this.updateLocalPrice();
-        if (button) {
-          button.removeAttribute('disabled');
-        }
       },
     });
   }
 
   /**
-   * Get offer quantity from cart object
+   * @description Update data-object and info on page
+   * @param {node} button
+   */
+  updateCartData(obData) {
+    this.obCartData = obData.data;
+    this.updateInfo = new UpdateInfo(this.obUpdateOptions, this.obCartData);
+  }
+
+  /**
+   * @description Get offer quantity from cart object
    * @param {int} iOfferID
-   * @returns {int}
    */
   getOfferQuantity(iOfferID) {
     let iQuantity = '';
@@ -54,21 +51,20 @@ export default class CartHelper {
     if (!obCartPosition[0]) {
       iQuantity = 0;
     } else {
-      const obOfferInfo = this.obCartData.position[obCartPosition];
+      const obOfferInfo = this.obCartData.position[obCartPosition[0]];
       const { quantity } = obOfferInfo;
+
       iQuantity = quantity;
     }
 
-    return parseInt(iQuantity, 10);
+    return parseInt(iQuantity, this.iRadix);
   }
 
   /**
    * Find cart position by item ID and type
    * @param {int} iItemID
    * @param {string} sItemType
-   * @returns {object}
    */
-
   findCartPosition(ItemID, sItemType) {
     const iItemID = parseInt(ItemID, 10);
     let iPositionID = null;
@@ -85,11 +81,6 @@ export default class CartHelper {
 
   /**
    * @description Return filtered array with position ID
-   * @param {array} arCartPositionIDList
-   * @param {int} iItemID
-   * @param {string} sItemType
-   * @returns {int}
-   * @memberof CartHelper
    */
   filterPositionList(arCartPositionIDList, iItemID, sItemType) {
     const iPositionID = [...arCartPositionIDList].filter((id) => {
@@ -102,48 +93,11 @@ export default class CartHelper {
   }
 
   /**
-   * @memberof CartHelper
-   */
-
-  updateLocalPrice() {
-    const { position: arPosition } = this.obCartData;
-
-    [...Object.keys(arPosition)].forEach(id => this.changePrice(id, arPosition));
-  }
-
-  /**
-   * @description Update product price in product card
-   * @param {int} id
-   * @param {object} obPosition
-   * @memberof CartHelper
-   */
-
-  changePrice(id, arPosition) {
-    const priceNode = document.querySelectorAll(`[${this.positionIdAttr}="${id}"]`);
-
-    if (!priceNode) return;
-
-    [...priceNode].forEach(node => this.setNewPrice(node, arPosition, id));
-  }
-
-  setNewPrice(priceNode, arPosition, id) {
-    const currentPriceNode = priceNode.querySelectorAll(`.${this.sPositionCurrentPriceClass}`);
-    if (!currentPriceNode) return;
-    [...currentPriceNode].forEach((node) => { node.innerHTML = arPosition[id].price; });
-
-    const oldPriceNode = priceNode.querySelectorAll(`.${this.sPositionOldPriceClass}`);
-    if (!oldPriceNode) return;
-    [...oldPriceNode].forEach((node) => { node.innerHTML = arPosition[id].old_price; });
-  }
-
-  /**
    * @description Get product ID from attribute
-   * @param obProduct
-   * @returns {int}
    */
   getOfferId(obProduct) {
     if (!obProduct) {
-      throw new Error('obProduct variable is empty');
+      throw new Error('obProduct variable is empty. It mast contain product card node');
     }
 
     const iProductIdNodeCollection = obProduct.querySelectorAll(`[name=${this.sOfferIdAttr}]`);
@@ -163,8 +117,6 @@ export default class CartHelper {
 
   /**
    * @description Get checked radio button
-   * @param collection
-   * @returns {node}
    */
   static getIdFromRadioCollection(obCollection) {
     const iProductIdNode = [...obCollection].filter(node => node.checked);
@@ -174,8 +126,6 @@ export default class CartHelper {
 
   /**
    * @description Detect type of input with offer id
-   * @param iProductIdNodeCollection
-   * @returns {boolean}
    */
   static getOfferIdInputType(iProductIdNodeCollection) {
     const firstNode = iProductIdNodeCollection[0];
