@@ -1,0 +1,27 @@
+{
+  "name": "@lovata/popup-helper",
+  "author": "lovata",
+  "version": "0.3.0",
+  "description": "Package adds helper methods for work with modal window",
+  "license": "GPL-3.0-or-later",
+  "keywords": [
+    "octobercms",
+    "modal",
+    "popup"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lovata/oc-shopaholic-js-helper.git"
+  },
+  "dependencies": {
+    "focus-trap": "^4.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/lovata/oc-shopaholic-js-helper/issues"
+  },
+  "homepage": "https://github.com/lovata/oc-shopaholic-js-helper/tree/master/packages/popup-helper#readme",
+  "main": "popup-helper.js"
+}
