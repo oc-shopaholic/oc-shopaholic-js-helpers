@@ -1,0 +1,13 @@
+body._noscroll {
+  position: fixed;
+  box-sizing: border-box;
+  height: 100%;
+  overflow: hidden;
+  padding-right: var(--body-padding, 0);
+  -webkit-overflow-scrolling: auto;
+
+  @media (min-width: 769px) {
+    position: relative;
+    height: auto;
+  }
+}
