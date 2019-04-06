@@ -1,14 +1,14 @@
 import ShopaholicCartPosition from "@lovata/shopaholic-cart/shopaholic-cart-position";
 import ShopaholicCart from "@lovata/shopaholic-cart/shopaholic-cart";
+import ShopaholicCartShippingType from "@lovata/shopaholic-cart/shopaholic-cart-shipping-type";
 
 /**
  * @author  Uladzimir Ambrazhey, <v.ambrazhey@lovata.com>, LOVATA Group
  * @author  Andrey Kharanenka, a.khoronenko@lovata.com, LOVATA Group
  */
-export default class ShopaholicAddCart {
+export default class ShopaholicCartAdd {
   constructor() {
     this.sDefaultButtonClass = '_shopaholic-cart-add';
-    this.sButtonSelector = `.${this.sDefaultButtonClass}`;
 
     this.obAjaxRequestCallback = null;
 
@@ -22,7 +22,7 @@ export default class ShopaholicAddCart {
   * Init event handlers
   */
   init() {
-    $(document).on('click', `${this.sButtonSelector}`, (obEvent) => {
+    $(document).on('click', `.${this.sDefaultButtonClass}`, (obEvent) => {
       obEvent.preventDefault();
 
       const {currentTarget: obButton} = obEvent;
@@ -49,6 +49,7 @@ export default class ShopaholicAddCart {
     const obCartPosition = new ShopaholicCartPosition(obButton);
     let obPositionData = obCartPosition.getData();
     const iOfferID = obPositionData.offer_id;
+    const obShippingType = new ShopaholicCartShippingType();
 
     const iCartQuantity = ShopaholicCart.instance().getOfferQuantity(iOfferID);
 
@@ -57,6 +58,7 @@ export default class ShopaholicAddCart {
     let obRequestData = {
       data: {
         cart: [obPositionData],
+        'shipping_type_id': obShippingType.getShippingTypeID()
       },
       complete: ({responseJSON}) => {
         this.completeCallback(responseJSON, obButton);
@@ -94,32 +96,6 @@ export default class ShopaholicAddCart {
    */
   setAjaxRequestCallback(obCallback) {
     this.obAjaxRequestCallback = obCallback;
-
-    return this;
-  }
-
-  /**
-   * Redeclare default selector of "Add to cart" button
-   * Default value is ._shopaholic-cart-add
-   *
-   * @param {string} sSelector
-   * @returns {ShopaholicAddCart}
-   */
-  setButtonSelector(sSelector) {
-    this.sButtonSelector = sSelector;
-
-    return this;
-  }
-
-  /**
-   * Redeclare default selector of product wrapper with product ID in attribute
-   * Default value is ._shopaholic-product-wrapper
-   *
-   * @param {string} sSelector
-   * @returns {ShopaholicAddCart}
-   */
-  setWrapperSelector(sSelector) {
-    this.sWrapperSelector = sSelector;
 
     return this;
   }

@@ -1,5 +1,6 @@
 import ShopaholicCartPosition from "@lovata/shopaholic-cart/shopaholic-cart-position";
 import ShopaholicCart from "@lovata/shopaholic-cart/shopaholic-cart";
+import ShopaholicCartShippingType from "@lovata/shopaholic-cart/shopaholic-cart-shipping-type";
 
 /**
  * @author  Uladzimir Ambrazhey, <v.ambrazhey@lovata.com>, LOVATA Group
@@ -8,11 +9,8 @@ import ShopaholicCart from "@lovata/shopaholic-cart/shopaholic-cart";
 export default class ShopaholicCartRemove {
   constructor() {
     this.sDefaultButtonClass = '_shopaholic-cart-remove';
-    this.sButtonSelector = `.${this.sDefaultButtonClass}`;
-
-    this.obAjaxRequestCallback = null;
-
     this.sRemoveComponentMethod = 'Cart::onRemove';
+    this.obAjaxRequestCallback = null;
 
     ShopaholicCart.instance();
   }
@@ -21,7 +19,7 @@ export default class ShopaholicCartRemove {
   * Init event handlers
   */
   init() {
-    $(document).on('click', `${this.sButtonSelector}`, (obEvent) => {
+    $(document).on('click', `.${this.sDefaultButtonClass}`, (obEvent) => {
       obEvent.preventDefault();
 
       const {currentTarget: obButton} = obEvent;
@@ -46,11 +44,13 @@ export default class ShopaholicCartRemove {
     obButton.setAttribute('disabled', 'disabled');
     const obCartPosition = new ShopaholicCartPosition(obButton);
     const iPositionID = obCartPosition.getPositionID();
+    const obShippingType = new ShopaholicCartShippingType();
 
     let obRequestData = {
       data: {
         cart: [iPositionID],
-        type: 'position'
+        type: 'position',
+        'shipping_type_id': obShippingType.getShippingTypeID()
       },
       complete: ({responseJSON}) => {
         this.completeCallback(responseJSON, obButton);
@@ -86,32 +86,6 @@ export default class ShopaholicCartRemove {
    */
   setAjaxRequestCallback(obCallback) {
     this.obAjaxRequestCallback = obCallback;
-
-    return this;
-  }
-
-  /**
-   * Redeclare default selector of "Remove from cart" button
-   * Default value is "._shopaholic-cart-remove"
-   *
-   * @param {string} sSelector
-   * @returns {ShopaholicCartRemove}
-   */
-  setButtonSelector(sSelector) {
-    this.sButtonSelector = sSelector;
-
-    return this;
-  }
-
-  /**
-   * Redeclare default selector of product wrapper with product ID in attribute
-   * Default value is "._shopaholic-product-wrapper"
-   *
-   * @param {string} sSelector
-   * @returns {ShopaholicCartRemove}
-   */
-  setWrapperSelector(sSelector) {
-    this.sWrapperSelector = sSelector;
 
     return this;
   }

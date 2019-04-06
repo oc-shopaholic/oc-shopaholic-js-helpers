@@ -17,6 +17,7 @@ export default class ShopaholicCartPosition {
     this.iPositionID = null;
     this.iOfferID = null;
     this.iQuantity = 1;
+    this.obProperty = {};
     this.iRadix = 10;
 
     if (!this.obProductCart) {
@@ -44,7 +45,7 @@ export default class ShopaholicCartPosition {
     let obData = {
       'id': this.iPositionID,
       'offer_id': this.iOfferID,
-      'quantity': this.iQuantity,
+      'quantity': this.iQuantity
     };
 
     return obData;
@@ -64,6 +65,14 @@ export default class ShopaholicCartPosition {
    */
   getQuantity() {
     return this.iQuantity;
+  }
+
+  /**
+   * Get quantity input node
+   * @returns {node}
+   */
+  getQuantityInput() {
+    return this.obProductCart.querySelector(`[name=${this.sQuantityAttr}]`);
   }
 
   /**
@@ -99,7 +108,7 @@ export default class ShopaholicCartPosition {
    * Get offer quantity from cart object
    */
   initQuantity() {
-    const obQuantityInput = this.obProductCart.querySelector(`[name=${this.sQuantityAttr}]`);
+    const obQuantityInput = this.getQuantityInput();
     if (!obQuantityInput) {
       return;
     }
@@ -111,11 +120,6 @@ export default class ShopaholicCartPosition {
    * Get offer quantity from cart object
    */
   initCartPositionID() {
-    const obAttribute = this.obProductCart.getAttributeNode(`${this.sPositionIDAttr}`);
-    if (!obAttribute) {
-      return;
-    }
-
-    this.iPositionID = parseInt(obAttribute.value, this.iRadix);
+    this.iPositionID = parseInt(this.obProductCart.getAttribute(`${this.sPositionIDAttr}`), this.iRadix);
   }
 }
