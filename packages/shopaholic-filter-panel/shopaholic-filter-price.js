@@ -17,6 +17,8 @@ export default class ShopaholicFilterPrice {
 
     this.sDefaultInputClass = '_shopaholic-price-filter';
     this.sInputSelector = `.${this.sDefaultInputClass}`;
+
+    this.iCallBackDelay = 400;
   }
 
   /**
@@ -24,16 +26,15 @@ export default class ShopaholicFilterPrice {
    */
   init() {
     $(document).on(this.sEventType, this.sInputSelector, () => {
-      UrlGeneration.init();
-      this.prepareRequestData();
+      if (this.sEventType === 'input') {
+        clearTimeout(this.timer);
 
-      UrlGeneration.remove('page');
-      UrlGeneration.update();
-      if (!this.obProductListHelper) {
-        return;
+        this.timer = setTimeout(() => {
+          this.priceChangeCallBack();
+        }, this.iCallBackDelay);
+      } else {
+        this.priceChangeCallBack();
       }
-
-      this.obProductListHelper.send();
     });
 
     $(document).on('input', this.sInputSelector, ({ currentTarget }) => {
@@ -42,6 +43,19 @@ export default class ShopaholicFilterPrice {
 
       currentTarget.value = correctValue; // eslint-disable-line no-param-reassign
     });
+  }
+
+  priceChangeCallBack() {
+    UrlGeneration.init();
+    this.prepareRequestData();
+
+    UrlGeneration.remove('page');
+    UrlGeneration.update();
+    if (!this.obProductListHelper) {
+      return;
+    }
+
+    this.obProductListHelper.send();
   }
 
   prepareRequestData() {

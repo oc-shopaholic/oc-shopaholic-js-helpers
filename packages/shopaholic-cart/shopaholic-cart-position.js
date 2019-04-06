@@ -20,9 +20,12 @@ export default class ShopaholicCartPosition {
     this.obProperty = {};
     this.iRadix = 10;
 
+    this.eventName = 'shopaholic.cart.position.extend';
     if (!this.obProductCart) {
       throw new Error('Product wrapper is empty. It mast contain product card node');
     }
+
+    this.referenceType = 'radio';
 
     this.initOfferID();
     this.initQuantity();
@@ -38,15 +41,17 @@ export default class ShopaholicCartPosition {
   }
 
   /**
-   * Get cart position data 
+   * Get cart position data
    * @returns {{quantity: number, id: null, offer_id: null}}
    */
   getData() {
-    let obData = {
-      'id': this.iPositionID,
-      'offer_id': this.iOfferID,
-      'quantity': this.iQuantity
+    const obData = {
+      id: this.iPositionID,
+      offer_id: this.iOfferID,
+      quantity: this.iQuantity,
+      property: this.obProperty
     };
+    document.dispatchEvent(this.createCustomEvent(obData));
 
     return obData;
   }
@@ -76,7 +81,7 @@ export default class ShopaholicCartPosition {
   }
 
   /**
-   * Get offeer ID from input
+   * Get offer ID from input
    */
   initOfferID() {
     const obOfferIDNodeCollection = this.obProductCart.querySelectorAll(`[name=${this.sOfferIDAttr}]`);
@@ -99,9 +104,9 @@ export default class ShopaholicCartPosition {
    */
   getOfferIDInputType(obOfferIDNodeCollection) {
     const firstNode = obOfferIDNodeCollection[0];
-    const {type: sType} = firstNode;
+    const { type: sType } = firstNode;
 
-    return sType === 'radio';
+    return sType === this.referenceType;
   }
 
   /**
@@ -121,5 +126,15 @@ export default class ShopaholicCartPosition {
    */
   initCartPositionID() {
     this.iPositionID = parseInt(this.obProductCart.getAttribute(`${this.sPositionIDAttr}`), this.iRadix);
+  }
+
+  createCustomEvent(options) {
+    const event = new CustomEvent(this.eventName, {
+      bubbles: true,
+      cancelable: true,
+      detail: options,
+    });
+
+    return event;
   }
 }
