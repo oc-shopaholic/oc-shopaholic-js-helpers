@@ -109,7 +109,7 @@ export default class ShopaholicOrder {
    * Set ajax request callback
    *
    * @param {function} obCallback
-   * @returns {ShopaholicAddCart}
+   * @returns {ShopaholicOrder}
    */
   setAjaxRequestCallback(obCallback) {
     this.obAjaxRequestCallback = obCallback;

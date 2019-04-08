@@ -36,10 +36,8 @@ import ShopaholicSearch from "@lovata/shopaholic-search";
 
 const obHelper = new ShopaholicSearch();
 obHelper
-  .setSearchInputSelector('search-input')
   .setSearchLimit(5)
   .setSearchDelay(600)
-  .setComponentMethod('CustomComponent::obAjaxSearch')
   .setAjaxRequestCallback(function(obRequestData) {
     obRequestData.loading = '.preloader';
     obRequestData.update = {'search/search-result': '.search-result-wrapper'};
@@ -47,7 +45,6 @@ obHelper
     return obRequestData;
   }).init();
 ```
-
 
 ## Methods
 
@@ -71,18 +68,6 @@ obHelper.setAjaxRequestCallback(function(obRequestData) {
   
   return obRequestData;
 }).init();
-```
-
-### setSearchInputSelector()
-
-You can to redeclare default selector of search input.
-Default value is **"._shopaholic-search-input"**.
-
-```javascript
-import ShopaholicSearch from "@lovata/shopaholic-search";
-
-const obHelper = new ShopaholicSearch();
-obHelper.setSearchInputSelector('.search-input').init();
 ```
 
 ### setSearchLimit()
@@ -109,18 +94,6 @@ import ShopaholicSearch from "@lovata/shopaholic-search";
 
 const obHelper = new ShopaholicSearch();
 obHelper.setSearchDelay(600).init();
-```
- 
-### setComponentMethod()
-
-You can to redeclare default ajax component method.
-Default value is **"ProductList::onAjaxRequest"**.
-
-```javascript
-import ShopaholicSearch from "@lovata/shopaholic-search";
-
-const obHelper = new ShopaholicSearch();
-obHelper.setComponentMethod('CustomComponent::obAjaxSearch').init();
 ```
 
 ## License
