@@ -171,26 +171,6 @@ const obFilterPanel = new ShopaholicFilterPanel();
 obFilterPanel.setFieldName('filter').init();
 ```
 
-#### setFilterType()
-
-Redeclare default filter type attribute.
-Default value is **"data-filter-type"**.
-
-```javascript
-const obFilterPanel = new ShopaholicFilterPanel();
-obFilterPanel.setFilterType('data-type').init();
-```
-
-#### setPropertyIDAttribute()
-
-Redeclare default attribute with property ID.
-Default value is **"data-property-id"**.
-
-```javascript
-const obFilterPanel = new ShopaholicFilterPanel();
-obFilterPanel.setPropertyIDAttribute('data-id').init();
-```
-
 ## License
 
 © 2019, [LOVATA Group, LLC](https://github.com/lovata) under [GNU GPL v3](https://opensource.org/licenses/GPL-3.0).

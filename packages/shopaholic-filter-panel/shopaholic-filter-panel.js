@@ -128,30 +128,4 @@ export default class ShopaholicFilterPanel {
 
     return this;
   }
-
-  /**
-   * Redeclare default filter type attribute
-   * Default value is "data-filter-type"
-   *
-   * @param {string} sFilterType
-   * @returns {ShopaholicFilterPanel}
-   */
-  setFilterType(sFilterType) {
-    this.sFilterType = sFilterType;
-
-    return this;
-  }
-
-  /**
-   * Redeclare default attribute with property ID
-   * Default value is "data-property-id"
-   *
-   * @param {string} sAttributeName
-   * @returns {ShopaholicFilterPanel}
-   */
-  setPropertyIDAttribute(sAttributeName) {
-    this.sPropertyIDAttribute = sAttributeName;
-
-    return this;
-  }
 }
