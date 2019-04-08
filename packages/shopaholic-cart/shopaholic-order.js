@@ -21,11 +21,18 @@ export default class ShopaholicOrder {
     };
   }
 
+  /**
+   * Prepare request object with order data
+   * Send ajax request and create order
+   */
   create() {
     this.prepareRequestObject();
-    this.sendRequest();
+    this.sendAjaxRequest();
   }
 
+  /**
+   * Prepare request object from order form
+   */
   prepareRequestObject()
   {
     const obOrderForm = document.querySelector(`.${this.sOrderFormClass}`);
@@ -41,15 +48,17 @@ export default class ShopaholicOrder {
     obFieldList.forEach((obFieldNode) => {
       this.addFieldValue(obFieldNode);
     });
-    
-    console.log(this.obOrder);
   }
 
+  /**
+   * Process node and add field value in request object
+   * @param {node} obFieldNode
+   */
   addFieldValue(obFieldNode) {
-    const sGroup = obFieldNode.getAttribute(this.sGroupAttribute);
-    let sField = obFieldNode.getAttribute(this.sFieldAttribute);
+    const sGroup = obFieldNode.getAttribute(this.sGroupAttribute).replace(/-/g, '_').toLowerCase();
+    let sField = obFieldNode.getAttribute(this.sFieldAttribute).replace(/-/g, '_').toLowerCase();
     if (!sField) {
-      sField = obFieldNode.name;
+      sField = obFieldNode.name.replace(/-/g, '_').toLowerCase();
     }
 
     const {type: sType} = obFieldNode;
@@ -66,6 +75,11 @@ export default class ShopaholicOrder {
     this.addValueToObject(sField, sValue);
   }
 
+  /**
+   * Add field value in request object
+   * @param {string} sField
+   * @param {string} sValue
+   */
   addValueToObject(sField, sValue) {
     const arFieldList = sField.split('.');
     let obValueObject = this.obOrder;
@@ -94,7 +108,10 @@ export default class ShopaholicOrder {
     }
   }
 
-  sendRequest() {
+  /**
+   * Send ajax request and create order
+   */
+  sendAjaxRequest() {
 
     let obRequestData = {data: this.obOrder};
 

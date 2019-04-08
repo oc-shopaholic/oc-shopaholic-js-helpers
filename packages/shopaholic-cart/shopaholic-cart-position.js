@@ -128,6 +128,11 @@ export default class ShopaholicCartPosition {
     this.iPositionID = parseInt(this.obProductCart.getAttribute(`${this.sPositionIDAttr}`), this.iRadix);
   }
 
+  /**
+   * Create event
+   * @param options
+   * @returns {CustomEvent<any>}
+   */
   createCustomEvent(options) {
     const event = new CustomEvent(this.eventName, {
       bubbles: true,

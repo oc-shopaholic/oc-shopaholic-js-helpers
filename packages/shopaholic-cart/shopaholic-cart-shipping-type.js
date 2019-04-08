@@ -23,14 +23,14 @@ export default class ShopaholicCartShippingType {
     $(document).on('change', `[name="${this.sDefaultInputName}"]`, (obEvent) => {
 
       const {currentTarget: obInput} = obEvent;
-      this.change(obInput);
+      this.sendAjaxRequest(obInput);
     });
   }
 
   /**
    * Send ajax request and update prices with new shipping-type-id
    */
-  change(obInput) {
+  sendAjaxRequest(obInput) {
 
     const iShippingTypeID = this.getShippingTypeID();
 
@@ -96,7 +96,7 @@ export default class ShopaholicCartShippingType {
    * Set ajax request callback
    *
    * @param {function} obCallback
-   * @returns {ShopaholicAddCart}
+   * @returns {ShopaholicCartShippingType}
    */
   setAjaxRequestCallback(obCallback) {
     this.obAjaxRequestCallback = obCallback;

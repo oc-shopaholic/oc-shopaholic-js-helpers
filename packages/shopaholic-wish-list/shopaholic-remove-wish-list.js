@@ -22,7 +22,7 @@ export default class ShopaholicRemoveWishList {
       const obButton = $(obEvent.currentTarget),
         iProductID = this.getProductID(obButton);
 
-      this.remove(iProductID, obButton);
+      this.sendAjaxRequest(iProductID, obButton);
     });
   }
 
@@ -31,7 +31,7 @@ export default class ShopaholicRemoveWishList {
    * @param {int} iProductID
    * @param obButton
    */
-  remove(iProductID, obButton) {
+  sendAjaxRequest(iProductID, obButton) {
     let obRequestData = {
       'data': {'product_id': iProductID}
     };

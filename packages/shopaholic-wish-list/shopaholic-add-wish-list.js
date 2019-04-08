@@ -22,7 +22,7 @@ export default class ShopaholicAddWishList {
       const obButton = $(obEvent.currentTarget),
         iProductID = this.getProductID(obButton);
 
-      this.add(iProductID, obButton);
+      this.sendAjaxRequest(iProductID, obButton);
     });
   }
 
@@ -31,7 +31,7 @@ export default class ShopaholicAddWishList {
    * @param {int} iProductID
    * @param obButton
    */
-  add(iProductID, obButton) {
+  sendAjaxRequest(iProductID, obButton) {
     let obRequestData = {
       'data': {'product_id': iProductID}
     };

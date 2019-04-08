@@ -17,7 +17,7 @@ export default class ShopaholicClearWishList {
     $(document).on('click', this.sButtonSelector, (obEvent) => {
       const obButton = $(obEvent.currentTarget);
 
-      this.clear(obButton);
+      this.sendAjaxRequest(obButton);
     });
   }
 
@@ -25,7 +25,7 @@ export default class ShopaholicClearWishList {
    * Clear wish list
    * @param obButton
    */
-  clear(obButton) {
+  sendAjaxRequest(obButton) {
     let obRequestData = {};
 
     if (this.obAjaxRequestCallback !== null) {

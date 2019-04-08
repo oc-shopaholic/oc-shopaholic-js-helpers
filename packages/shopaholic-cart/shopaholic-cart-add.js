@@ -30,7 +30,7 @@ export default class ShopaholicCartAdd {
         return;
       }
 
-      this.add(obButton);
+      this.sendAjaxRequest(obButton);
     });
   }
 
@@ -40,7 +40,7 @@ export default class ShopaholicCartAdd {
    * @param {boolean} bForceAddMethod Sets enforced method `this.sAddComponentMethod`
    */
 
-  add(obButton, bForceAddMethod = false) {
+  sendAjaxRequest(obButton, bForceAddMethod = false) {
     if (!obButton) {
       throw new Error('Button node is empty.');
     }
@@ -92,7 +92,7 @@ export default class ShopaholicCartAdd {
    * Set ajax request callback
    *
    * @param {function} obCallback
-   * @returns {ShopaholicAddCart}
+   * @returns {ShopaholicCartAdd}
    */
   setAjaxRequestCallback(obCallback) {
     this.obAjaxRequestCallback = obCallback;

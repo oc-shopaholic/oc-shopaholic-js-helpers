@@ -13,8 +13,7 @@ export default class ShopaholicCartUpdate {
     this.sDecreaseInputClass = '_shopaholic-cart-decrease-quantity';
     this.sUpdateComponentMethod = 'Cart::onUpdate';
     this.obAjaxRequestCallback = null;
-    
-    this.radix = 10;
+
     this.iDelayBeforeRequest = 400;
     this.obTimer = null;
 
@@ -26,8 +25,8 @@ export default class ShopaholicCartUpdate {
   */
   init() {
     this.initUpdateEvent();
-    this.initIncreseEvent();
-    this.initDecreseEvent();
+    this.initIncreaseEvent();
+    this.initDecreaseEvent();
   }
 
   /**
@@ -52,7 +51,7 @@ export default class ShopaholicCartUpdate {
           return;
         }
 
-        this.update(obInput);
+        this.sendAjaxRequest(obInput);
       }, this.iDelayBeforeRequest);
     });
   }
@@ -60,7 +59,7 @@ export default class ShopaholicCartUpdate {
   /**
    * Init increase event
    */
-  initIncreseEvent() {
+  initIncreaseEvent() {
     $(document).on('click', `.${this.sIncreaseInputClass}`, (obEvent) => {
       if (this.obTimer !== null) {
         clearTimeout(this.obTimer);
@@ -91,15 +90,15 @@ export default class ShopaholicCartUpdate {
       }
 
       this.obTimer = setTimeout(() => {
-        this.update(obInput);
+        this.sendAjaxRequest(obInput);
       }, this.iDelayBeforeRequest);
     });
   }
 
   /**
-   * Init decreace event
+   * Init decrease event
    */
-  initDecreseEvent() {
+  initDecreaseEvent() {
     $(document).on('click', `.${this.sDecreaseInputClass}`, (obEvent) => {
       if (this.obTimer !== null) {
         clearTimeout(this.obTimer);
@@ -130,7 +129,7 @@ export default class ShopaholicCartUpdate {
       }
 
       this.obTimer = setTimeout(() => {
-        this.update(obInput);
+        this.sendAjaxRequest(obInput);
       }, this.iDelayBeforeRequest);
     });
   }
@@ -139,8 +138,7 @@ export default class ShopaholicCartUpdate {
    * Update position data
    * @param {node} obInput
    */
-
-  update(obInput) {
+  sendAjaxRequest(obInput) {
     if (!obInput) {
       throw new Error('Input node is empty.');
     }
@@ -191,7 +189,7 @@ export default class ShopaholicCartUpdate {
    * Set ajax request callback
    *
    * @param {function} obCallback
-   * @returns {ShopaholicAddUpdate}
+   * @returns {ShopaholicCartUpdate}
    */
   setAjaxRequestCallback(obCallback) {
     this.obAjaxRequestCallback = obCallback;

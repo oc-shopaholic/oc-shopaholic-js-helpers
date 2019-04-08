@@ -27,7 +27,7 @@ export default class ShopaholicCartRemove {
         return;
       }
 
-      this.remove(obButton);
+      this.sendAjaxRequest(obButton);
     });
   }
 
@@ -35,8 +35,7 @@ export default class ShopaholicCartRemove {
    * Remove cart position
    * @param {node} obButton
    */
-
-  remove(obButton) {
+  sendAjaxRequest(obButton) {
     if (!obButton) {
       throw new Error('Button node is empty.');
     }

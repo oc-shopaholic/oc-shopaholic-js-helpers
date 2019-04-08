@@ -82,7 +82,7 @@ export default class ShopaholicCart {
 
   /**
    * Get field value from cart position object
-   * @param {int} iOfferID
+   * @param {int} iPositionID
    * @param {string} sField
    */
   getOfferPositionField(iPositionID, sField) {
@@ -96,7 +96,7 @@ export default class ShopaholicCart {
 
   /**
    * Get field value from object
-   * @param {int} iOfferID
+   * @param {string} sGroup
    * @param {string} sField
    */
   getField(sGroup, sField) {
@@ -155,6 +155,9 @@ export default class ShopaholicCart {
     return obPosition;
   }
 
+  /**
+   * Find price fields and update price values
+   */
   renderPriceFields() {
     const obNodeList = document.querySelectorAll(`.${this.sNodeClass}`);
     if (!obNodeList || obNodeList.length === 0) {
@@ -166,16 +169,17 @@ export default class ShopaholicCart {
       const sGroup = sGroupOriginal.replace(/-/g, '_').toLowerCase();
       const sFieldOriginal = obPriceNode.getAttribute(this.sFieldAttribute);
       const sField = sFieldOriginal.replace(/-/g, '_').toLowerCase();
+      let sNewValue = '';
 
       if (sGroup === 'position') {
         const obCartPosition = new ShopaholicCartPosition(obPriceNode);
         const iPositionID = obCartPosition.getPositionID();
-        const sNewValue = this.getOfferPositionField(iPositionID, sField);
+        sNewValue = this.getOfferPositionField(iPositionID, sField);
 
         obPriceNode.textContent = sNewValue;
         this.processPositionOldPriceField(obCartPosition, sField, sFieldOriginal, sGroupOriginal);
       } else {
-        const sNewValue = this.getField(sGroup, sField);
+        sNewValue = this.getField(sGroup, sField);
 
         obPriceNode.textContent = sNewValue;
         this.processOldPriceField(sField, sFieldOriginal, sGroup, sGroupOriginal);
@@ -189,7 +193,6 @@ export default class ShopaholicCart {
    * @param {ShopaholicCartPosition} obCartPosition
    * @param {string} sField
    * @param {string} sFieldOriginal
-   * @param {string} sGroup
    * @param {string} sGroupOriginal
    */
   processPositionOldPriceField(obCartPosition, sField, sFieldOriginal, sGroupOriginal) {

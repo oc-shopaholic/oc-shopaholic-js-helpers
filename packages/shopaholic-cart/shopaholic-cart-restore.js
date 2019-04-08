@@ -27,7 +27,7 @@ export default class ShopaholicCartRestore {
         return;
       }
 
-      this.restore(obButton);
+      this.sendAjaxRequest(obButton);
     });
   }
 
@@ -35,8 +35,7 @@ export default class ShopaholicCartRestore {
    * Restore cart position
    * @param {node} obButton
    */
-
-  restore(obButton) {
+  sendAjaxRequest(obButton) {
     if (!obButton) {
       throw new Error('Button node is empty.');
     }
