@@ -22,11 +22,17 @@ export default class ShopaholicCouponRemove {
       obEvent.preventDefault();
       const { currentTarget: obButton } = obEvent;
       const obInput = document.querySelector('[data-coupon]');
-      const { value: sValue } = obInput;
-
-      if (!sValue) {
-        return;
+      
+      let sValue = '';
+      
+      if (obInput.tagName.toLocaleLowerCase() === 'input') {
+        const { value } = obInput;
+        sValue = value;
+      } else {
+        sValue = obInput.getAttribute('data-coupon-value');
       }
+
+      if (!sValue) return;
 
       obButton.setAttribute('disabled', 'disabled');
 
