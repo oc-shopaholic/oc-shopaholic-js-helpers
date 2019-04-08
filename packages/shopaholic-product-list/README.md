@@ -60,16 +60,6 @@ const obPaginationHelper = new ShopaholicPagination();
 obPaginationHelper.setButtonSelector('pagination_link').init();
 ```
 
-#### setAttributeName()
-
-Redeclare default attribute with page number.
-Default value is **"data-page"**.
-
-```javascript
-const obPaginationHelper = new ShopaholicPagination();
-obPaginationHelper.setAttributeName('data-number').init();
-```
-
 ## shopaholic-sorting
 
 Class will allow you to quickly sorting with ajax request in your project.
@@ -105,16 +95,6 @@ obSortingHelper.init();
 
 Method adds event handler on select with sorting variants and send ajax request with using ShopaholicProductList class object.
 Method adds "sort" param in your search string. For example: http::site.com/catalog?sort=popularity|desc
-
-#### setSelectSelector()
-
-Redeclare default selector of sorting select.
-Default value is **"_shopaholic-sorting"**.
-
-```javascript
-const obSortingHelper = new ShopaholicSorting();
-obSortingHelper.setSelectSelector('_sorting').init();
-```
 
 ## shopaholic-product-list
 
@@ -154,18 +134,6 @@ obListHelper.setAjaxRequestCallback((obRequestData) => {
 
   return obRequestData;
 });
-```
-
-#### setComponentMethod()
-
-Redeclare default ajax component method.
-Default value is **"ProductList::onAjaxRequest"**.
-
-```javascript
-import ShopaholicProductList from "@lovata/shopaholic-product-list/shopaholic-product-list";
-
-const obListHelper = new ShopaholicProductList();
-obListHelper.setComponentMethod('ProductList::onCustomMethod');
 ```
 
 ## License

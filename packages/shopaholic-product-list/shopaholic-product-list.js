@@ -32,17 +32,4 @@ export default class ShopaholicProductList {
 
     return this;
   }
-
-  /**
-   * Redeclare default ajax component method
-   * Default value is ProductList::onAjaxRequest
-   *
-   * @param {string} sComponentMethod
-   * @returns {ShopaholicProductList}
-   */
-  setComponentMethod(sComponentMethod) {
-    this.sComponentMethod = sComponentMethod;
-
-    return this;
-  }
 }

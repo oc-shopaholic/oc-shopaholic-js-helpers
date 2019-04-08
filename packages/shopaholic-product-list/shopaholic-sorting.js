@@ -34,17 +34,4 @@ export default class ShopaholicSorting {
       this.obProductListHelper.send();
     });
   }
-
-  /**
-   * Redeclare default selector of sorting select
-   * Default value is "_shopaholic-sorting"
-   *
-   * @param {string} sSelectSelector
-   * @returns {ShopaholicSorting}
-   */
-  setSelectSelector(sSelectSelector) {
-    this.sSelectSelector = sSelectSelector;
-
-    return this;
-  }
 }

@@ -56,17 +56,4 @@ export default class ShopaholicPagination {
 
     return this;
   }
-
-  /**
-   * Redeclare default attribute with page number
-   * Default value is "data-page"
-   *
-   * @param {string} sAttributeName
-   * @returns {ShopaholicPagination}
-   */
-  setAttributeName(sAttributeName) {
-    this.sAttributeName = sAttributeName;
-
-    return this;
-  }
 }
