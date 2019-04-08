@@ -21,7 +21,7 @@ export default class ShopaholicCouponAdd {
     $(document).on('click', `.${this.sButtonClass}`, (obEvent) => {
       obEvent.preventDefault();
       const { currentTarget: obButton } = obEvent;
-      const obInput = document.querySelector(`[name="coupon"]`);
+      const obInput = document.querySelector('[data-coupon]');
       const { value: sValue } = obInput;
 
       if (!sValue) {
@@ -42,15 +42,14 @@ export default class ShopaholicCouponAdd {
    * @param {object} obButton
    */
   sendAjaxRequest(sValue, obInput, obButton) {
-
     const obShippingType = new ShopaholicCartShippingType();
 
     let obRequestData = {
       data: {
         coupon: sValue,
-        'shipping_type_id': obShippingType.getShippingTypeID()
+        shipping_type_id: obShippingType.getShippingTypeID(),
       },
-      complete: ({responseJSON}) => {
+      complete: ({ responseJSON }) => {
         this.completeCallback(responseJSON, obInput, obButton);
       },
     };
