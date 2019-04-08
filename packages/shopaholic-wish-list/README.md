@@ -18,7 +18,7 @@ Class will allow you to quickly add "Add to wish list" button in your project.
 ### Basic usage
 
 ```html
-<div class="product-wrapper _shopaholic-product-wrapper" data-product-id="{{ obProduct.id }}">
+<div class="_shopaholic-product-wrapper" data-product-id="{{ obProduct.id }}">
     <h2>{{ obProduct.name }}</h2>
     <button type="button" class="_shopaholic-add-wish-list-button" aria-label="Add to wish list">
 </div>
@@ -39,8 +39,6 @@ import ShopaholicAddWishList from "@lovata/shopaholic-wish-list/shopaholic-add-w
 const obHelper = new ShopaholicAddWishList();
 obHelper
   .setButtonSelector('.add-wish-list-button')
-  .setWrapperSelector('.product-wrapper')
-  .setAttributeName('data-id')
   .setAjaxRequestCallback((obRequestData, obButton) => {
     obRequestData.loading = '.preloader';
     obRequestData.update = {'wish-list/wish-list-info': '.wish-list-info-wrapper'};
@@ -92,42 +90,6 @@ const obHelper = new ShopaholicAddWishList();
 obHelper.setButtonSelector('.add-wish-list-button').init();
 ```
 
-#### setWrapperSelector()
-
-Redeclare default selector of product wrapper with product ID in attribute.
-Default value is **"._shopaholic-product-wrapper"**.
-
-```javascript
-import ShopaholicAddWishList from "@lovata/shopaholic-wish-list/shopaholic-add-wish-list";
-
-const obHelper = new ShopaholicAddWishList();
-obHelper.setWrapperSelector('.product-wrapper').init();
-```
-
-#### setAttributeName()
-
-Redeclare default attribute name with product ID.
-Default value is **"data-product-id"**.
-
-```javascript
-import ShopaholicAddWishList from "@lovata/shopaholic-wish-list/shopaholic-add-wish-list";
-
-const obHelper = new ShopaholicAddWishList();
-obHelper.setAttributeName('.data-id').init();
-```
-
-#### setComponentMethod()
-
-Redeclare default ajax component method.
-Default value is **"ProductList::onAddToWishList"**.
-
-```javascript
-import ShopaholicAddWishList from "@lovata/shopaholic-wish-list/shopaholic-add-wish-list";
-
-const obHelper = new ShopaholicAddWishList();
-obHelper.setAttributeName('ProductPage::onAddToWishList').init();
-```
-
 ## **shopaholic-remove-wish-list**
 
 Class will allow you to quickly add "Remove from wish list" button in your project.
@@ -135,7 +97,7 @@ Class will allow you to quickly add "Remove from wish list" button in your proje
 ### Basic usage
 
 ```html
-<div class="product-wrapper _shopaholic-product-wrapper" data-product-id="{{ obProduct.id }}">
+<div class="_shopaholic-product-wrapper" data-product-id="{{ obProduct.id }}">
     <h2>{{ obProduct.name }}</h2>
     <button type="button" class="_shopaholic-remove-wish-list-button" aria-label="Remove from wish list">
 </div>
@@ -156,8 +118,6 @@ import ShopaholicRemoveWishList from "@lovata/shopaholic-wish-list/shopaholic-re
 const obHelper = new ShopaholicRemoveWishList();
 obHelper
   .setButtonSelector('.remove-wish-list-button')
-  .setWrapperSelector('.product-wrapper')
-  .setAttributeName('data-id')
   .setAjaxRequestCallback((obRequestData, obButton) => {
     obRequestData.loading = '.preloader';
     obRequestData.update = {'wish-list/wish-list-info': '.wish-list-info-wrapper'};
@@ -207,42 +167,6 @@ import ShopaholicRemoveWishList from "@lovata/shopaholic-wish-list/shopaholic-re
 
 const obHelper = new ShopaholicRemoveWishList();
 obHelper.setButtonSelector('.remove-wish-list-button').init();
-```
-
-#### setWrapperSelector()
-
-Redeclare default selector of product wrapper with product ID in attribute.
-Default value is **"._shopaholic-product-wrapper"**.
-
-```javascript
-import ShopaholicRemoveWishList from "@lovata/shopaholic-wish-list/shopaholic-remove-wish-list";
-
-const obHelper = new ShopaholicRemoveWishList();
-obHelper.setWrapperSelector('.product-wrapper').init();
-```
-
-#### setAttributeName()
-
-Redeclare default attribute name with product ID.
-Default value is **"data-product-id"**.
-
-```javascript
-import ShopaholicRemoveWishList from "@lovata/shopaholic-wish-list/shopaholic-remove-wish-list";
-
-const obHelper = new ShopaholicRemoveWishList();
-obHelper.setAttributeName('.data-id').init();
-```
-
-#### setComponentMethod()
-
-Redeclare default ajax component method.
-Default value is **"ProductList::onRemoveFromWishList"**.
-
-```javascript
-import ShopaholicRemoveWishList from "@lovata/shopaholic-wish-list/shopaholic-remove-wish-list";
-
-const obHelper = new ShopaholicRemoveWishList();
-obHelper.setAttributeName('ProductPage::onRemoveFromWishList').init();
 ```
 
 ## **shopaholic-clear-wish-list**
@@ -319,18 +243,6 @@ import ShopaholicClearWishList from "@lovata/shopaholic-wish-list/shopaholic-cle
 
 const obHelper = new ShopaholicClearWishList();
 obHelper.setButtonSelector('.clear-wish-list-button').init();
-```
-
-#### setComponentMethod()
-
-Redeclare default ajax component method.
-Default value is **"ProductList::onClearWishList"**.
-
-```javascript
-import ShopaholicClearWishList from "@lovata/shopaholic-wish-list/shopaholic-clear-wish-list";
-
-const obHelper = new ShopaholicClearWishList();
-obHelper.setAttributeName('ProductPage::onClearWishList').init();
 ```
 
 ## License

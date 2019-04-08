@@ -3,7 +3,7 @@
  */
 export default class ShopaholicClearWishList {
   constructor() {
-    this.sDefaultButtonClass = '_shopaholic-remove-wish-list-button';
+    this.sDefaultButtonClass = '_shopaholic-clear-wish-list-button';
     this.sButtonSelector = `.${this.sDefaultButtonClass}`;
 
     this.sComponentMethod = 'ProductList::onClearWishList';
@@ -39,7 +39,7 @@ export default class ShopaholicClearWishList {
    * Set ajax request callback
    *
    * @param {function} obCallback
-   * @returns {ShopaholicRemoveWishList}
+   * @returns {ShopaholicClearWishList}
    */
   setAjaxRequestCallback(obCallback) {
     this.obAjaxRequestCallback = obCallback;
@@ -48,27 +48,14 @@ export default class ShopaholicClearWishList {
   }
 
   /**
-   * Redeclare default selector of "Remove from wish list" button
-   * Default value is ._shopaholic-remove-wish-list-button
+   * Redeclare default selector of "Clear wish list" button
+   * Default value is ._shopaholic-clear-wish-list-button
    *
    * @param {string} sSelector
-   * @returns {ShopaholicRemoveWishList}
+   * @returns {ShopaholicClearWishList}
    */
   setButtonSelector(sSelector) {
     this.sButtonSelector = sSelector;
-
-    return this;
-  }
-
-  /**
-   * Redeclare default ajax component method
-   * Default value is ProductList::onRemoveFromWishList
-   *
-   * @param {string} sComponentMethod
-   * @returns {ShopaholicRemoveWishList}
-   */
-  setComponentMethod(sComponentMethod) {
-    this.sComponentMethod = sComponentMethod;
 
     return this;
   }

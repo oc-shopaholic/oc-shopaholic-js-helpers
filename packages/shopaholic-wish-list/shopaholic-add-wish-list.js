@@ -79,43 +79,4 @@ export default class ShopaholicAddWishList {
 
     return this;
   }
-
-  /**
-   * Redeclare default selector of product wrapper with product ID in attribute
-   * Default value is ._shopaholic-product-wrapper
-   *
-   * @param {string} sSelector
-   * @returns {ShopaholicAddWishList}
-   */
-  setWrapperSelector(sSelector) {
-    this.sWrapperSelector = sSelector;
-
-    return this;
-  }
-
-  /**
-   * Redeclare default attribute name with product ID
-   * Default value is data-product-id
-   *
-   * @param {string} sAttribute
-   * @returns {ShopaholicAddWishList}
-   */
-  setAttributeName(sAttribute) {
-    this.sAttributeName = sAttribute;
-
-    return this;
-  }
-
-  /**
-   * Redeclare default ajax component method
-   * Default value is ProductList::onAddToWishList
-   *
-   * @param {string} sComponentMethod
-   * @returns {ShopaholicAddWishList}
-   */
-  setComponentMethod(sComponentMethod) {
-    this.sComponentMethod = sComponentMethod;
-
-    return this;
-  }
 }

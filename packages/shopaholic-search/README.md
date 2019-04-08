@@ -83,7 +83,7 @@ const obHelper = new ShopaholicSearch();
 obHelper.setSearchLimit(5).init();
 ```
 
-### setSearchDelay
+### setSearchDelay()
 
 You can to redeclare default search delay value.
 Default value is **400 ms**.
