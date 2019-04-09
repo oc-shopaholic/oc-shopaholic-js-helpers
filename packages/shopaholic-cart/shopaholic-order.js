@@ -55,8 +55,10 @@ export default class ShopaholicOrder {
    * @param {node} obFieldNode
    */
   addFieldValue(obFieldNode) {
-    const sGroup = obFieldNode.getAttribute(this.sGroupAttribute).replace(/-/g, '_').toLowerCase();
-    let sField = obFieldNode.getAttribute(this.sFieldAttribute).replace(/-/g, '_').toLowerCase();
+    const sGroupOriginal = obFieldNode.getAttribute(this.sGroupAttribute);
+    const sGroup = !!sGroupOriginal ? sGroupOriginal.replace(/-/g, '_').toLowerCase(): sGroupOriginal;
+    let sFieldOriginal = obFieldNode.getAttribute(this.sFieldAttribute);
+    let sField = !!sFieldOriginal ? sFieldOriginal.replace(/-/g, '_').toLowerCase() : sFieldOriginal;
     if (!sField) {
       sField = obFieldNode.name.replace(/-/g, '_').toLowerCase();
     }

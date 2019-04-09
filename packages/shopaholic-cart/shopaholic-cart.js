@@ -166,9 +166,9 @@ export default class ShopaholicCart {
 
     obNodeList.forEach((obPriceNode) => {
       const sGroupOriginal = obPriceNode.getAttribute(this.sGroupAttribute);
-      const sGroup = sGroupOriginal.replace(/-/g, '_').toLowerCase();
+      const sGroup = !!sGroupOriginal ? sGroupOriginal.replace(/-/g, '_').toLowerCase() : sGroupOriginal;
       const sFieldOriginal = obPriceNode.getAttribute(this.sFieldAttribute);
-      const sField = sFieldOriginal.replace(/-/g, '_').toLowerCase();
+      const sField = !!sFieldOriginal? sFieldOriginal.replace(/-/g, '_').toLowerCase() : sFieldOriginal;
       let sNewValue = '';
 
       if (sGroup === 'position') {
