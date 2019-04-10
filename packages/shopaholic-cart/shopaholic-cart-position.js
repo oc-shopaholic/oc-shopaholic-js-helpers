@@ -125,7 +125,12 @@ export default class ShopaholicCartPosition {
    * Get offer quantity from cart object
    */
   initCartPositionID() {
-    this.iPositionID = parseInt(this.obProductCart.getAttribute(`${this.sPositionIDAttr}`), this.iRadix);
+    const sValue = this.obProductCart.getAttribute(`${this.sPositionIDAttr}`);
+    if (!sValue) {
+      return;
+    }
+
+    this.iPositionID = parseInt(sValue, this.iRadix);
   }
 
   /**

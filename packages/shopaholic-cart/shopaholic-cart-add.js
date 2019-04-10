@@ -69,7 +69,7 @@ export default class ShopaholicCartAdd {
       obRequestData = this.obAjaxRequestCallback(obRequestData, obButton);
     }
 
-    const ajaxHandler = iCartQuantity > 1 && !bForceAddMethod ? this.sUpdateComponentMethod : this.sAddComponentMethod;
+    const ajaxHandler = iCartQuantity >= 1 && !bForceAddMethod ? this.sUpdateComponentMethod : this.sAddComponentMethod;
 
     $.request(ajaxHandler, obRequestData);
   }
