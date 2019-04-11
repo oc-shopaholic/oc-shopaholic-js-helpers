@@ -32,8 +32,11 @@ export default class ShopaholicSearch {
   processSearchString(sSearchString) {
     sSearchString = sSearchString.trim();
     if (sSearchString.length < this.iSearchLimit) {
+      sSearchString = null;
+    }
+
+    if (!!this.obTimer) {
       clearTimeout(this.obTimer);
-      return;
     }
 
     this.sSearchState = sSearchString;
