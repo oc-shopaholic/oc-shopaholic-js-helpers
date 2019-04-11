@@ -19,7 +19,7 @@ export default class ShopaholicSearch {
    * Init event handlers
    */
   init() {
-    $(document).on('keyup', this.sSearchInput, (obEvent) => {
+    $(document).on('input', this.sSearchInput, (obEvent) => {
       let sSearchString = $(obEvent.currentTarget).val();
       this.processSearchString(sSearchString);
     });
@@ -36,7 +36,7 @@ export default class ShopaholicSearch {
     }
 
     if (sSearchString.length < this.iSearchLimit) {
-      sSearchString = null;
+      sSearchString = '';
     }
 
     if (!!this.obTimer) {
