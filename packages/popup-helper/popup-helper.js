@@ -150,7 +150,7 @@ export default new class popupHelper {
   removeOverlay() {
     if (!this.checkOverlay()) return;
 
-    $(`.${this.overlaySelector}`).remove();
+    document.querySelector(`.${this.overlaySelector}`).remove();
   }
 
   /**
