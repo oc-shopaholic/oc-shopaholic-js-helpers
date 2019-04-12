@@ -1,7 +1,7 @@
 {
   "name": "@lovata/popup-helper",
   "author": "lovata",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Package adds helper methods for work with modal window",
   "license": "GPL-3.0-or-later",
   "keywords": [
