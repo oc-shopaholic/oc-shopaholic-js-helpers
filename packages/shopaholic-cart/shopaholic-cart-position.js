@@ -45,7 +45,7 @@ export default class ShopaholicCartPosition {
    * @returns {{quantity: number, id: null, offer_id: null}}
    */
   getData() {
-    const obData = {
+    let obData = {
       id: this.iPositionID,
       offer_id: this.iOfferID,
       quantity: this.iQuantity,
