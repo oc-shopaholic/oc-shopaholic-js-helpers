@@ -68,10 +68,11 @@ export default class ShopaholicCart {
   /**
    * Get offer quantity from cart object
    * @param {int} iOfferID
+   * @param {object} obOfferProperty
    */
-  getOfferQuantity(iOfferID) {
+  getOfferQuantity(iOfferID, obOfferProperty) {
     let iQuantity = 0;
-    const obCartPosition = this.findCartPositionByOfferID(iOfferID, this.sOfferItemType);
+    const obCartPosition = this.findCartPositionByOfferID(iOfferID, this.sOfferItemType, obOfferProperty);
 
     if (!!obCartPosition) {
       iQuantity = obCartPosition.quantity;
@@ -111,8 +112,9 @@ export default class ShopaholicCart {
    * Find cart position by item ID and type
    * @param {int} iItemID
    * @param {string} sItemType
+   * @param {object} obOfferProperty
    */
-  findCartPositionByOfferID(iItemID, sItemType) {
+  findCartPositionByOfferID(iItemID, sItemType, obOfferProperty) {
     iItemID = parseInt(iItemID, 10);
     let obPosition = null;
 
@@ -124,7 +126,8 @@ export default class ShopaholicCart {
     const arCartPositionIDList = Object.keys(obPositionList);
     for (let iKey of arCartPositionIDList) {
       let obPositionItem = obPositionList[iKey];
-      if (obPositionItem.item_id != iItemID || obPositionItem.item_type != sItemType) {
+      if (obPositionItem.item_id != iItemID || obPositionItem.item_type != sItemType
+        || JSON.stringify(obPositionItem.property) != JSON.stringify(obOfferProperty)) {
         continue;
       }
 
