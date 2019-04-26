@@ -50,8 +50,8 @@ export default class ShopaholicCartAdd {
     let obPositionData = obCartPosition.getData();
     const iOfferID = obPositionData.offer_id;
     const obShippingType = new ShopaholicCartShippingType();
-
-    const iCartQuantity = ShopaholicCart.instance().getOfferQuantity(iOfferID);
+    const obOfferProperty = obPositionData.property;
+    const iCartQuantity = ShopaholicCart.instance().getOfferQuantity(iOfferID, obOfferProperty);
 
     obPositionData.quantity += iCartQuantity;
 
