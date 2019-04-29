@@ -54,7 +54,7 @@ export default class ShopaholicCart {
       this.obCartData = responseJSON;
     };
 
-    $.request(this.sGetDataHandler, obRequestData);
+    $.request(this.sGetDataHandler, obData);
   }
 
   /**
