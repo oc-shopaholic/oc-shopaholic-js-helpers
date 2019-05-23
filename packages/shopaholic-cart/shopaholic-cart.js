@@ -44,13 +44,12 @@ export default class ShopaholicCart {
       return;
     }
 
-    let obData = obRequestData;
-
-    if (!obRequestData) {
-      obData = {};
+    let obData = {};
+    if (!!obRequestData) {
+      obData = obRequestData;
     }
 
-    obData.complete = ({ responseJSON }) => {
+    obData.complete = ({responseJSON}) => {
       this.obCartData = responseJSON;
     };
 
