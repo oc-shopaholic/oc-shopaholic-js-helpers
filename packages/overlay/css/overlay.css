@@ -1,0 +1,35 @@
+:root {
+  --overlay-background-color: var(--color-black);
+  --overlay-transition-duration: 0.5s;
+  --overlay-transition-timing-function: ease;
+  --overlay-visible-opacity: 0.5;
+}
+
+html.noscroll {
+  overflow-y: hidden;
+  height: 100%;
+
+  body {
+    overflow: hidden;
+  }
+}
+
+html.has-scrollbar {
+  overflow-y: scroll;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity var(--overlay-transition-duration) var(--overlay-transition-timing-function);
+  background-color: var(--overlay-background-color);
+
+  &_visible {
+    opacity: var(--overlay-visible-opacity);
+  }
+}

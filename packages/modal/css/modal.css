@@ -1,0 +1,41 @@
+:root {
+  --modal-inner-background-color: white;
+  --modal-inner-opacity: 0;
+  --modal-inner-transform: none;
+  --modal-inner-transition-duration: 0.5s;
+  --modal-inner-transition-property: opacity, transform;
+  --modal-inner-transition-timing-function: ease;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  overflow: auto;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  &_active {
+    display: flex;
+  }
+
+  &_visible {
+    --modal-inner-opacity: 1;
+    --modal-inner-transform: translate3d(0, 0, 0);
+  }
+}
+
+.modal__inner {
+  opacity: var(--modal-inner-opacity);
+  transform: var(--modal-inner-transform);
+  background-color: var(--modal-inner-background-color);
+  transition-duration: var(--modal-inner-transition-duration);
+  transition-property: var(--modal-inner-transition-property);
+  transition-timing-function: var(--modal-inner-transition-timing-function);
+}
