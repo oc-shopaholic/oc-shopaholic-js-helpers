@@ -1,0 +1,23 @@
+{
+  "name": "@lovata/overlay",
+  "author": "lovata",
+  "version": "0.0.1",
+  "description": "Package adds helper methods for work with overlay",
+  "license": "GPL-3.0-or-later",
+  "keywords": [
+    "octobercms",
+    "overlay"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lovata/oc-shopaholic-js-helper.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/lovata/oc-shopaholic-js-helper/issues"
+  },
+  "homepage": "https://github.com/lovata/oc-shopaholic-js-helper/tree/master/packages/overlay#readme",
+  "main": "overlay.js"
+}
