@@ -31,6 +31,9 @@ export default new class Overlay {
 
   hide() {
     const overlay = document.querySelector(`.${this.overlaySelector}`);
+
+    if (!overlay) return;
+    
     const newScrollTop = -document.body.style.marginTop.slice(0, -2);
 
     overlay.classList.remove(this.overlayVisibleSelector);
