@@ -1,7 +1,7 @@
 {
   "name": "@lovata/overlay",
   "author": "lovata",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Package adds helper methods for work with overlay",
   "license": "GPL-3.0-or-later",
   "keywords": [
