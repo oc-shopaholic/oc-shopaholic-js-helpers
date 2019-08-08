@@ -3,55 +3,55 @@ import Overlay from '@lovata/overlay';
 
 export default new class Modal {
   constructor() {
-    this.modalSelector = '.modal';
-    this.modalInnerSelector = '.modal__inner';
+    this.modalSelector = 'modal';
+    this.modalBodySelector = 'modal__body';
     this.modalCloseButtonSelector = '[data-modal-close]';
     this.modalOpenButtonSelector = '[data-modal]';
-    this.modalActiveClass = 'modal_active';
-    this.modalVisibleClass = 'modal_visible';
-    this.modalAnimationSpeed = 500;
+    this.modalActiveSelector = 'modal_active';
+    this.modalVisibleSelector = 'modal_visible';
+    this.modalAnimationSpeed = null;
 
     this.handler();
   }
 
   handler() {
-    document.addEventListener('click', (event) => {
-      const modalOpenButton = event.target.closest(this.modalOpenButtonSelector);
+    document.addEventListener('click', ({ target }) => {
+      const modalOpenButton = target.closest(this.modalOpenButtonSelector);
 
       if (!modalOpenButton) return;
 
       const modalId = modalOpenButton.dataset.modal;
 
-      this.showModal(modalId);
+      this.show(modalId);
     });
 
-    document.addEventListener('click', (event) => {
-      const modalCloseButton = event.target.closest(this.modalCloseButtonSelector);
+    document.addEventListener('click', ({ target }) => {
+      const modalCloseButton = target.closest(this.modalCloseButtonSelector);
 
       if (!modalCloseButton) return;
 
-      this.hideModal();
+      this.hide();
     });
 
-    document.addEventListener('click', (event) => {
-      if (event.target.closest(this.modalSelector)
-        && !event.target.closest(this.modalInnerSelector)) {
-        this.hideModal();
+    document.addEventListener('click', ({ target }) => {
+      if (target.closest(`.${this.modalSelector}`) &&
+        !target.closest(`.${this.modalBodySelector}`)) {
+        this.hide();
       }
     });
 
-    window.addEventListener('keydown', (event) => {
-      if (event.keyCode === 27
-        && this.activeModal
-        && document.activeElement.closest(this.modalSelector)) {
-        this.hideModal();
+    window.addEventListener('keydown', ({ keyCode }) => {
+      if (keyCode === 27 &&
+        this.activeModal &&
+        document.activeElement.closest(`.${this.modalSelector}`)) {
+        this.hide();
       }
     });
   }
 
-  showModal(id) {
+  show(id) {
     if (this.activeModal) {
-      this.hideModal({
+      this.hide({
         hideOverlay: false,
       });
     } else {
@@ -60,32 +60,35 @@ export default new class Modal {
 
     this.activeModal = document.querySelector(`#${id}`);
     this.replaceModalToBodyEnd();
-    this.activeModal.classList.add(this.modalActiveClass);
+    this.activeModal.classList.add(this.modalActiveSelector);
+    if (this.modalAnimationSpeed === null) {
+      const activeModalBody = this.activeModal.querySelector(`.${this.modalBodySelector}`);
+
+      this.modalAnimationSpeed = this.constructor.getTransitionDuration(activeModalBody, 'opacity');
+    }
 
     setTimeout(() => {
-      this.activeModal.classList.add(this.modalVisibleClass);
+      this.activeModal.classList.add(this.modalVisibleSelector);
       this.activateFocusTrap();
-    }, 10);
+    });
   }
 
-  hideModal({ hideOverlay = true } = {}) {
+  hide({ hideOverlay = true } = {}) {
     if (!this.activeModal) return;
 
-    const oldActiveModal = document.querySelector(`${this.modalSelector}.${this.modalActiveClass}`);
+    const oldActiveModal = document.querySelector(`.${this.modalSelector}.${this.modalActiveSelector}`);
 
     this.deactivateFocusTrap();
 
     if (hideOverlay) {
-      Overlay.hide({
-        animationSpeed: this.modalAnimationSpeed,
-      });
+      Overlay.hide();
       this.activeModal = null;
     }
 
-    oldActiveModal.classList.remove(this.modalVisibleClass);
+    oldActiveModal.classList.remove(this.modalVisibleSelector);
 
     setTimeout(() => {
-      oldActiveModal.classList.remove(this.modalActiveClass);
+      oldActiveModal.classList.remove(this.modalActiveSelector);
     }, this.modalAnimationSpeed);
   }
 
@@ -109,7 +112,19 @@ export default new class Modal {
     this.focusTrap.deactivate();
   }
 
-  setAnimationSpeed(speed) {
-    this.modalAnimationSpeed = speed;
+  static getTransitionDuration(element, propertyName) {
+    const computedStyle = getComputedStyle(element);
+    const transitions = computedStyle.transition.split(', ');
+    const transitionProperties = computedStyle.transitionProperty.split(', ');
+    let duration = 0;
+
+    transitionProperties.some((property, index) => {
+      if (property === propertyName) {
+        duration = +transitions[index].split(' ')[1].slice(0, -1) * 1000;
+        return true;
+      }
+    });
+
+    return duration;
   }
 }();

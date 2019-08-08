@@ -20,12 +20,12 @@ import Overlay from '@lovata/overlay';
 
 Helper accepts some css custom properties
 
-| Property | Type | Default value |
-| --- | --- | --- |
-| --overlay-opacity | <code>number</code> | 0.5 |
-| --overlay-background-color | <code>string</code> | #000000 |
-| --overlay-transition-duration | <code>string</code> | 0.5s |
-| --overlay-transition-timing-function | <code>string</code> | ease |
+| Property | Default value |
+| --- | --- |
+| --overlay-opacity | 0.5 |
+| --overlay-background-color | #000000 |
+| --overlay-transition-duration | 0.5s |
+| --overlay-transition-timing-function | ease |
 
 ## Methods
 

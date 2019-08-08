@@ -20,8 +20,8 @@ import Modal from '@lovata/modal';
 
 ```html
 <div class="modal" id="{id}">
-    <div class="modal__inner">
-        <button type="button" class="modal__close-btn" data-modal-close></button>
+    <div class="modal__body">
+        <button type="button" data-modal-close></button>
         
     </div>
 </div>
@@ -35,9 +35,18 @@ Element with attribute `data-modal-open="{id}"` click will open modal with speci
 <button type="button" data-modal-open="{id}">...</button>
 ```
 
+## CSS settings
+
+Helper accepts some css custom properties
+
+| Property | Default value |
+| --- | --- |
+| --modal__body--transition-timing-function | ease |
+| --modal__body--transition-duration | 0.5s |
+
 ## Methods
 
-### showModal(id)
+### show(id)
 
 `Open modal window`
 
@@ -45,21 +54,13 @@ Element with attribute `data-modal-open="{id}"` click will open modal with speci
 | --- | --- |
 | id | <code>string</code> |
 
-### hideModal({ hideOverlay })
+### hide({ hideOverlay })
 
 `Close opened modal window`
 
 | Param | Type | Description |
 | --- | --- | --- |
 | hideOverlay | <code>boolean</code> | Wheter to hide overlay. Default - true |
-
-### setAnimationSpeed(speed)
-
-`Set custom overlay animation speed in ms`
-
-| Param | Type | Description |
-| --- | --- | --- |
-| speed | <code>number</code> | Default - 500 |
 
 ### activateFocusTrap()
 

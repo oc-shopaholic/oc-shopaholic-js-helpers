@@ -8,11 +8,11 @@ export default new class Overlay {
   }
 
   show() {
-    const overlay = document.createElement('div');
+    this.overlay = document.createElement('div');
     const scrollY = window.scrollY || document.documentElement.scrollTop;
 
-    overlay.classList.add(this.overlaySelector);
-    document.body.append(overlay);
+    this.overlay.classList.add(this.overlaySelector);
+    document.body.append(this.overlay);
 
     if (window.innerWidth > document.documentElement.clientWidth) {
       document.documentElement.classList.add(this.htmlScrollbarSelector);
@@ -22,32 +22,31 @@ export default new class Overlay {
     document.documentElement.classList.add(this.htmlNoScrollSelector);
 
     setTimeout(() => {
-      overlay.classList.add(this.overlayVisibleSelector);
+      this.overlay.classList.add(this.overlayVisibleSelector);
       if (this.overlayAnimationSpeed === null) {
-        this.overlayAnimationSpeed = this.getTransitionDuration(overlay, 'opacity');
+        this.overlayAnimationSpeed = this.constructor.getTransitionDuration(this.overlay, 'opacity');
       }
     });
   }
 
   hide() {
-    const overlay = document.querySelector(`.${this.overlaySelector}`);
+    if (!this.overlay) return;
 
-    if (!overlay) return;
-    
     const newScrollTop = -document.body.style.marginTop.slice(0, -2);
 
-    overlay.classList.remove(this.overlayVisibleSelector);
+    this.overlay.classList.remove(this.overlayVisibleSelector);
 
     setTimeout(() => {
-      document.body.removeChild(overlay);
+      document.body.removeChild(this.overlay);
       document.documentElement.classList.remove(this.htmlScrollbarSelector);
       document.documentElement.classList.remove(this.htmlNoScrollSelector);
       document.body.style.marginTop = '';
       window.scrollTo(null, newScrollTop);
+      this.overlay = null;
     }, this.overlayAnimationSpeed);
   }
 
-  getTransitionDuration(element, propertyName) {
+  static getTransitionDuration(element, propertyName) {
     const computedStyle = getComputedStyle(element);
     const transitions = computedStyle.transition.split(', ');
     const transitionProperties = computedStyle.transitionProperty.split(', ');

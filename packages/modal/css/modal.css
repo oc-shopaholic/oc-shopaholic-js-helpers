@@ -1,21 +1,12 @@
-:root {
-  --modal-inner-background-color: white;
-  --modal-inner-opacity: 0;
-  --modal-inner-transform: none;
-  --modal-inner-transition-duration: 0.5s;
-  --modal-inner-transition-property: opacity, transform;
-  --modal-inner-transition-timing-function: ease;
-}
-
 .modal {
   position: fixed;
+  z-index: 100;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
-  z-index: 100;
-  overflow: auto;
+  left: 0;
   display: none;
+  overflow: auto;
   justify-content: center;
   align-items: center;
   backface-visibility: hidden;
@@ -26,16 +17,14 @@
   }
 
   &_visible {
-    --modal-inner-opacity: 1;
-    --modal-inner-transform: translate3d(0, 0, 0);
+    --modal__body--opacity: 1;
   }
 }
 
-.modal__inner {
-  opacity: var(--modal-inner-opacity);
-  transform: var(--modal-inner-transform);
-  background-color: var(--modal-inner-background-color);
-  transition-duration: var(--modal-inner-transition-duration);
-  transition-property: var(--modal-inner-transition-property);
-  transition-timing-function: var(--modal-inner-transition-timing-function);
+.modal__body {
+  max-width: 100%;
+  transition-timing-function: var(--modal__body--transition-timing-function, ease);
+  transition-duration: var(--modal__body--transition-duration, 0.5s);
+  transition-property: opacity;
+  opacity: var(--modal__body--opacity, 0);
 }
