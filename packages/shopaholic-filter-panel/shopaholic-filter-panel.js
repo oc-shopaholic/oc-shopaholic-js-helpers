@@ -66,6 +66,8 @@ export default class ShopaholicFilterPanel {
         obInputList = obWrapper.find('input[type="checkbox"]:checked');
       } else if (sFilterType == 'select' || sFilterType == 'select_between') {
         obInputList = obWrapper.find('select');
+      } else if (sFilterType == 'radio') {
+        obInputList = obWrapper.find('input[type="radio"]:checked');
       }
 
       if (!obInputList || obInputList.length == 0) {
