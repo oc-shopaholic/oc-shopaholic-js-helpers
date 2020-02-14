@@ -6,7 +6,7 @@ export default class ShopaholicSearch {
     this.sDefaultSearchInputClass = '_shopaholic-search-input';
     this.sSearchInput = `.${this.sDefaultSearchInputClass}`;
 
-    this.sComponentMethod = 'ProductList::onAjaxRequest';
+    this.sComponentMethod = 'onAjax';
     this.obAjaxRequestCallback = null;
     this.sSearchState = '';
     this.sSearchResultState = '';

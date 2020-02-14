@@ -1,7 +1,7 @@
 {
   "name": "@lovata/shopaholic-product-list",
   "author": "lovata",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Package adds helper methods for integration with [Shopaholic](https://octobercms.com/plugin/lovata-shopaholic) plugin.",
   "license": "GPL-3.0-or-later",
   "keywords": [

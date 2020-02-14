@@ -3,7 +3,7 @@
  */
 export default class ShopaholicProductList {
   constructor() {
-    this.sComponentMethod = 'ProductList::onAjaxRequest';
+    this.sComponentMethod = 'onAjax';
     this.obAjaxRequestCallback = null;
   }
 
