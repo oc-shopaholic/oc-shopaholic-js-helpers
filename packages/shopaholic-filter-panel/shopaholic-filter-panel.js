@@ -100,7 +100,11 @@ export default class ShopaholicFilterPanel {
    * @returns {ShopaholicFilterPanel}
    */
   setWrapperSelector(sWrapperSelector) {
-    this.sWrapperSelector = sWrapperSelector;
+    if (sWrapperSelector.slice(0, 1) === '.') {
+      this.sWrapperSelector = `.${sWrapperSelector}`;
+    } else {
+      this.sWrapperSelector = sWrapperSelector;
+    }
 
     return this;
   }
