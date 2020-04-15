@@ -72,7 +72,7 @@ export default class ShopaholicCartRestore {
     ShopaholicCart.instance().updateCartData(obCartData);
 
     if (obButton) {
-      obButton.restoreAttribute('disabled');
+      obButton.removeAttribute('disabled');
     }
   }
 
