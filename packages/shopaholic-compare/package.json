@@ -1,0 +1,22 @@
+{
+  "name": "@lovata/shopaholic-compare",
+  "author": "lovata",
+  "version": "1.0.0",
+  "description": "Package adds helper methods for integration with [Wish list for Shopaholic](https://octobercms.com/plugin/lovata-compareshopaholic) and [Shopaholic](https://octobercms.com/plugin/lovata-shopaholic) plugins.",
+  "license": "GPL-3.0-or-later",
+  "keywords": [
+    "octobercms",
+    "shopaholic",
+    "compare",
+    "compare list"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lovata/oc-shopaholic-js-helper.git"
+  },
+  "dependencies": {},
+  "bugs": {
+    "url": "https://github.com/lovata/oc-shopaholic-js-helper/issues"
+  },
+  "homepage": "https://github.com/lovata/oc-shopaholic-js-helper/tree/master/packages/shopaholic-compare#readme"
+}
