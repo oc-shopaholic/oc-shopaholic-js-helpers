@@ -14,7 +14,7 @@ npm install @lovata/shopaholic-coupon
 ## Basic usage
 
 ```html
-<input type="text" name="coupon" value="">
+<input type="text" name="coupon" data-coupon="" value="">
 
 <button class="_shopaholic-coupon-add">Apply coupon</button>
 <button class="_shopaholic-coupon-remove">Remove coupon</button>
