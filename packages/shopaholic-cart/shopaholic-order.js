@@ -26,6 +26,14 @@ export default class ShopaholicOrder {
    * Send ajax request and create order
    */
   create() {
+    this.obOrder = {
+      order: {
+        property: {},
+      },
+      user: {},
+      shipping_address: {},
+      billing_address: {},
+    };
     this.prepareRequestObject();
     this.sendAjaxRequest();
   }
