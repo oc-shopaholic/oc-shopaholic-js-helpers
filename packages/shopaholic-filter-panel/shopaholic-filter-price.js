@@ -63,8 +63,8 @@ export default class ShopaholicFilterPrice {
     const obInputList = $(this.setInputSelector);
     const obMinInput = obInputList.find(`[name=${this.sInputMinPriceName}]`);
     const obMaxInput = obInputList.find(`[name=${this.sInputMaxPriceName}]`);
-    const fMinLimit = parseFloat(obMinInput.attr('min'));
-    const fMaxLimit = parseFloat(obMinInput.attr('max'));
+    const fMinLimit = this.toFloat(obMinInput.attr('min'));
+    const fMaxLimit = this.toFloat(obMinInput.attr('max'));
 
     let fMinPrice = obMinInput.val();
     let fMaxPrice = obMaxInput.val();
@@ -149,5 +149,15 @@ export default class ShopaholicFilterPrice {
     this.sFiledName = sFieldName;
 
     return this;
+  }
+
+  /**
+   * Conversion to float type
+   *
+   * @param {string} sValue
+   * @returns {ShopaholicFilterPrice}
+   */
+  toFloat(sValue) {
+    return parseFloat(sValue.replace(/\s/g, ''));
   }
 }
