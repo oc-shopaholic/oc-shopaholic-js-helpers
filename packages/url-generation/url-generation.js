@@ -48,6 +48,10 @@ export default new class UrlGeneration {
 
     this.sSearchString = '';
     arFieldList.forEach((sField) => {
+      if(!this.obParamList[sField][0] && !this.obParamList[sField][1]){
+        return;
+      }
+      
       if (this.sSearchString.length > 0) {
         this.sSearchString += '&'
       }

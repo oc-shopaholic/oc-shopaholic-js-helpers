@@ -77,9 +77,6 @@ export default class ShopaholicFilterPanel {
 
       obInputList.each((iInputNumber) => {
         const sValue = $(obInputList[iInputNumber]).val();
-        if (!sValue) {
-          return;
-        }
 
         arValueList.push(sValue);
       });
