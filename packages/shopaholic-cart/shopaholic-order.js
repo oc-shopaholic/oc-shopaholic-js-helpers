@@ -65,6 +65,10 @@ export default class ShopaholicOrder {
 
     const {type: sType} = obFieldNode;
 
+    if (obFieldNode.disabled) {
+      return;
+    }
+
     if ((sType === 'radio' || sType === 'checkbox') && !obFieldNode.checked) {
       return;
     }
