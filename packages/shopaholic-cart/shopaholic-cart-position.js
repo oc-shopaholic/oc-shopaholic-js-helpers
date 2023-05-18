@@ -10,6 +10,7 @@ export default class ShopaholicCartPosition {
     this.sPositionIDAttr = 'data-position-id';
     this.sOfferIDAttr = 'offer_id';
     this.sQuantityAttr = 'quantity';
+    this.sPropertyAttr = 'property';
 
     this.obButton = obButton;
     this.obProductCart = obButton.closest(`${this.sWrapperSelector}`);
@@ -30,6 +31,7 @@ export default class ShopaholicCartPosition {
     this.initOfferID();
     this.initQuantity();
     this.initCartPositionID();
+    this.initProperty();
   }
 
   /**
@@ -131,6 +133,23 @@ export default class ShopaholicCartPosition {
     }
 
     this.iPositionID = parseInt(sValue, this.iRadix);
+  }
+
+  /**
+   * Get cart position property values
+   */
+  initProperty() {
+    const obPropertyNodeCollection = this.obProductCart.querySelectorAll(`[name^=${this.sPropertyAttr}]`);
+
+    if (obPropertyNodeCollection.length === 0) {
+      return;
+    }
+
+    const _self = this;
+    obPropertyNodeCollection.forEach(function(item, index, array) {
+      const propertyName = item.name.replace('property[', '').replace(']', '');
+      _self.obProperty[propertyName] = item.value;
+    });
   }
 
   /**
